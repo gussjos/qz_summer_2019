@@ -92,37 +92,39 @@ def get_rift_data():
 	return z_translated,-x_translated,y_translated #according to QTMS:s coordinate system
 
 
-qtm_traj = get_qtm_data()
-or_traj = get_rift_data()
-zed_traj = get_zed_data()
 
 
 
+def plotTrajectories():
 
-### 3d-plot ###
-fig = plt.figure()
-ax = plt.axes(projection='3d')
+	qtm_traj = get_qtm_data()
+	or_traj = get_rift_data()
+	zed_traj = get_zed_data()
 
-x = qtm_traj[0]
-y = qtm_traj[1]
-z = qtm_traj[2]
-max_range = np.array([x.max()-x.min(), y.max()-y.min(), z.max()-z.min()]).max() / 2.0
-mid_x = (x.max()+x.min()) * 0.5
-mid_y = (y.max()+y.min()) * 0.5
-mid_z = (z.max()+z.min()) * 0.5
-ax.set_xlim(mid_x - max_range, mid_x + max_range)
-ax.set_ylim(mid_y - max_range, mid_y + max_range)
-ax.set_zlim(mid_z - max_range, mid_z + max_range)
-plt.title('QTM, OR, & ZED trajectories')
+	### 3d-plot ###
+	fig = plt.figure()
+	ax = plt.axes(projection='3d')
 
-ax.plot3D(qtm_traj[0],qtm_traj[1],qtm_traj[2], color='r', label='QTM')
-ax.plot3D(or_traj[0], or_traj[1], or_traj[2], color='b', label='OR')
-#ax.plot3D(zed_traj[0], zed_traj[1], zed_traj[2], color='g', label='ZED')
-plt.xlabel('x', fontsize=24)
-plt.ylabel('y', fontsize=24)
-#plt.zlabel('z')
-plt.legend()
-plt.show()
+	x = qtm_traj[0]
+	y = qtm_traj[1]
+	z = qtm_traj[2]
+	max_range = np.array([x.max()-x.min(), y.max()-y.min(), z.max()-z.min()]).max() / 2.0
+	mid_x = (x.max()+x.min()) * 0.5
+	mid_y = (y.max()+y.min()) * 0.5
+	mid_z = (z.max()+z.min()) * 0.5
+	ax.set_xlim(mid_x - max_range, mid_x + max_range)
+	ax.set_ylim(mid_y - max_range, mid_y + max_range)
+	ax.set_zlim(mid_z - max_range, mid_z + max_range)
+	plt.title('QTM, OR, & ZED trajectories')
+
+	ax.plot3D(qtm_traj[0],qtm_traj[1],qtm_traj[2], color='r', label='QTM')
+	ax.plot3D(or_traj[0], or_traj[1], or_traj[2], color='b', label='OR')
+	#ax.plot3D(zed_traj[0], zed_traj[1], zed_traj[2], color='g', label='ZED')
+	plt.xlabel('x', fontsize=24)
+	plt.ylabel('y', fontsize=24)
+	#plt.zlabel('z')
+	plt.legend()
+	plt.show()
 
 
 
