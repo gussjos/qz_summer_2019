@@ -25,7 +25,13 @@ def get_qtm_data():
 	    for j in range(0, 2):
 	        qtm_rot[i,j] = qtm_data_matrix[:,6+i+j] # 5-16 contains rotation elements
 
-	return x,y,z
+
+	### translate everything to the origin ###
+	x_translated = np.array([u - x[0] for u in x])
+	y_translated = np.array([v - y[0] for v in y])
+	z_translated = np.array([w - z[0] for w in z])
+
+	return x_translated,y_translated,z_translated
 
 
 def get_zed_data():
@@ -43,7 +49,12 @@ def get_zed_data():
 	qz = df_np[:,5]
 	qw = df_np[:,6]
 
-	return x,y,z
+	### translate everything to the origin ###
+	x_translated = np.array([u - x[0] for u in x])
+	y_translated = np.array([v - y[0] for v in y])
+	z_translated = np.array([w - z[0] for w in z])
+
+	return z_translated,-x_translated,y_translated #according to QTMS:s coordinate system
 
 
 def get_rift_data():
@@ -70,7 +81,13 @@ def get_rift_data():
 	y = np.delete(y,i_array)
 	z = np.delete(z,i_array)
 
-	return x,y,z
+
+	### translate everything to the origin ###
+	x_translated = np.array([u - x[0] for u in x])
+	y_translated = np.array([v - y[0] for v in y])
+	z_translated = np.array([w - z[0] for w in z])
+
+	return z_translated,-x_translated,y_translated #according to QTMS:s coordinate system
 
 
 qtm_traj = get_qtm_data()
@@ -78,11 +95,6 @@ or_traj = get_rift_data()
 zed_traj = get_zed_data()
 
 
-### translate everything to the origin ###
-x_qtm = [x - qtm_traj[0][0] for x in qtm_traj[0]]
-y_qtm = [y - qtm_traj[1][0] for y in qtm_traj[1]]
-z_qtm = [z - qtm_traj[2][0] for z in qtm_traj[2]]
-qtm_traj = np.array([x_qtm, y_qtm, z_qtm])
 
 
 ### 3d-plot ###
@@ -104,8 +116,11 @@ plt.title('QTM, OR, & ZED trajectories')
 ax.plot3D(qtm_traj[0],qtm_traj[1],qtm_traj[2], color='r', label='QTM')
 ax.plot3D(or_traj[0], or_traj[1], or_traj[2], color='b', label='OR')
 ax.plot3D(zed_traj[0], zed_traj[1], zed_traj[2], color='g', label='ZED')
-plt.show()
+plt.xlabel('x', fontsize=24)
+plt.ylabel('y', fontsize=24)
+#plt.zlabel('z')
 plt.legend()
+plt.show()
 
 
 
