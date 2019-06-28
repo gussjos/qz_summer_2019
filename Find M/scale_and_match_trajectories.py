@@ -11,10 +11,10 @@ from read_and_plot_trajectories import get_qtm_data
 from read_and_plot_trajectories import get_rift_data
 
 ### BODGE ###
-I_qtm_first = 1862
-I_qtm_last = 2780
-I_or_first = 3193
-I_or_last = 7628
+I_qtm_first = 1000
+I_qtm_last = 1665
+I_or_first = 1419
+I_or_last = 4376
 
 
 qtm_traj = get_qtm_data()
