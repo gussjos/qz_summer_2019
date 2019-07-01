@@ -1,0 +1,67 @@
+import numpy as np
+from numpy import linalg
+import matplotlib.pyplot as plt
+from scipy.interpolate import interp1d
+import pandas
+from mpl_toolkits import mplot3d
+from collections import defaultdict
+import sys
+sys.path[0] = '../' + sys.path[0] + '/../smaple QTM OR ZED data'
+
+from read_and_plot_trajectories import get_qtm_data
+from read_and_plot_trajectories import get_rift_data
+from scale_and_match_trajectories import match_trajectories
+qtm_traj_matched, or_traj_matched = match_trajectories(get_qtm_data(), get_rift_data())
+
+
+### BODGE ###
+#p1 = [qtm_traj_matched[0][4000], qtm_traj_matched[1][4000], qtm_traj_matched[2][4000]]
+#q1 = [or_traj_matched[0][4000], or_traj_matched[1][4000], or_traj_matched[2][4000]]
+#p2 = [qtm_traj_matched[0][6000], qtm_traj_matched[1][6000], qtm_traj_matched[2][6000]]
+#q2 = [or_traj_matched[0][6000], or_traj_matched[1][6000], or_traj_matched[2][6000]]
+#p3 = [qtm_traj_matched[0][8000], qtm_traj_matched[1][8000], qtm_traj_matched[2][8000]]
+#q3 = [or_traj_matched[0][8000], or_traj_matched[1][8000], or_traj_matched[2][8000]]
+
+pdata = np.array(qtm_traj_matched)
+qdata = np.array(or_traj_matched)
+
+#p1 = np.array([1, 2])
+#p2 = np.array([2, 1])
+#p3 = np.array([1, 1])
+
+#p_data = [p1, p2, p3]
+
+#t = np.array([100, 0])
+#M = np.array([[0, 1], [-1, 0]])
+#q_data = [[], [], []] #initiate
+#for i,p in enumeratye(p_data):
+#	q = M.dot(p) + t
+#	q_data[i] = q
+
+
+#define centroids
+print(pdata)
+
+#centroid_p = (p1 + p2 + p3)/3
+#centroid_q = (q1 + q2 + q3)/3
+
+#transform centroids to origin
+#p1 = p1 - centroid_p
+#p2 = p2 - centroid_p
+#p3 = p3 - centroid_p
+#q1 = q1 - centroid_q
+#q2 = q2 - centroid_q
+#q3 = q3 - centroid_q
+
+
+H = np.outer(p1,q1) + np.outer(p2,q2) + np.outer(p3,q3)
+
+U, S, V = np.linalg.svd(H)
+
+
+R = V.dot(U.transpose())
+t = -R.dot(centroid_p) + centroid_q
+
+print(R)
+print(t)
+
