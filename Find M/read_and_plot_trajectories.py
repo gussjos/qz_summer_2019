@@ -4,8 +4,8 @@ import pandas
 from mpl_toolkits import mplot3d
 from collections import defaultdict
 import sys
-path = sys.path[0] + '/../sample_QTM-OR-ZED_data/'	#if running sample data
-#path = sys.path[0]									#if running like normal
+#path = sys.path[0] + '/../sample_QTM-OR-ZED_data/'	#if running sample data
+path = sys.path[0] + '/'							#if running like normal
 
 def translate(x,y,z): #translates a list of (x,y,z) coordinates so that the first one is the origin
 	x_translated = np.array([u - x[0] for u in x])
@@ -35,9 +35,8 @@ def get_qtm_data():
 	    for j in range(0, 2):
 	        qtm_rot[i,j] = qtm_data_matrix[:,6+i+j] # 5-16 contains rotation elements
 
-	x, y, z = translate(x,y,z) #ONLY FOR VISUAL COMPARISON BEFORE CALIBRATION
+	#x, y, z = translate(x,y,z) #ONLY FOR VISUAL COMPARISON BEFORE CALIBRATION
 	return x, y, z
-
 	
 def get_zed_data():
 
@@ -54,7 +53,7 @@ def get_zed_data():
 	qz = df_np[:,5]
 	qw = df_np[:,6]
 
-	x, y, z = translate(x,y,z) #ONLY FOR VISUAL COMPARISON BEFORE CALIBRATION
+	#x, y, z = translate(x,y,z) #ONLY FOR VISUAL COMPARISON BEFORE CALIBRATION
 	return x, y, z
 
 def get_rift_data():
@@ -83,7 +82,7 @@ def get_rift_data():
 	y = np.delete(y,index_array)
 	z = np.delete(z,index_array)
 
-	x, y, z = translate(x,y,z) #ONLY FOR VISUAL COMPARISON BEFORE CALIBRATION
+	#x, y, z = translate(x,y,z) #ONLY FOR VISUAL COMPARISON BEFORE CALIBRATION
 	return x, y, z
 
 def plot_trajectories():
@@ -93,11 +92,11 @@ def plot_trajectories():
 	qtm_traj = qtm_traj.transpose()
 
 	### BODGE ###
-	R = np.array([[0.38221699, 0.92062476, 0.07975096], [-0.63636707, 0.19965554, 0.74510041], [-0.67003516, 0.33554092, -0.66216702]])
-	t = np.array([-0.03394914, 0.22325696, 0.61104821])
-	for i,_ in enumerate(qtm_traj):
-		qtm_traj[i] = (R.dot(qtm_traj[i]) + t).transpose()
-	qtm_traj = qtm_traj.transpose()
+#	R = np.array([[0.38221699, 0.92062476, 0.07975096], [-0.63636707, 0.19965554, 0.74510041], [-0.67003516, 0.33554092, -0.66216702]])
+#	t = np.array([-0.03394914, 0.22325696, 0.61104821])
+#	for i,_ in enumerate(qtm_traj):
+#		qtm_traj[i] = (R.dot(qtm_traj[i]) + t).transpose()
+#	qtm_traj = qtm_traj.transpose()
 
 
 	or_traj = get_rift_data()

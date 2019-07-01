@@ -4,8 +4,8 @@ from scipy.interpolate import interp1d
 import pandas
 from mpl_toolkits import mplot3d
 from collections import defaultdict
-#from read_and_plot_trajectories import get_qtm_data
-#from read_and_plot_trajectories import get_rift_data
+from read_and_plot_trajectories import get_qtm_data #BODGE
+from read_and_plot_trajectories import get_rift_data #BODGE
 
 def handpalaggning(qtm_traj_var, or_traj_var): #BODGE
 	plt.figure()
@@ -25,10 +25,10 @@ def match_trajectories(qtm_traj, or_traj):#qtm/or_traj should be array with 3d v
 	or_traj = np.array(or_traj)
 
 	### BODGE ### TODO: find a way to do this using derivatives
-	I_qtm_first = 1483
-	I_qtm_last = 2351
-	I_or_first = 3085
-	I_or_last = 7824
+	I_qtm_first = 1284#1483
+	I_qtm_last = 8370#2351
+	I_or_first = 1920#3085
+	I_or_last = 19775#7824
 	
 
 	### remove data before and after actual trajectory ###
