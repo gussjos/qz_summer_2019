@@ -4,7 +4,8 @@ import pandas
 from mpl_toolkits import mplot3d
 from collections import defaultdict
 import sys
-#sys.path.insert(0, sys.path[0] + '/../smaple QTM OR ZED data')
+path = sys.path[0] + '/../sample_QTM-OR-ZED_data/'	#if running sample data
+#path = sys.path[0]									#if running like normal
 
 def translate(x,y,z): #translates a list of (x,y,z) coordinates so that the first one is the origin
 	x_translated = np.array([u - x[0] for u in x])
@@ -13,10 +14,9 @@ def translate(x,y,z): #translates a list of (x,y,z) coordinates so that the firs
 
 	return x_translated,y_translated,z_translated
 
-
 def get_qtm_data():
 
-	file = 'QTM_HMD_tracking_20190627_6D.tsv'
+	file = path + 'QTM_HMD_trajectory_6D.tsv'
 
 	qtm_data = pandas.read_csv(file, sep='\t')
 	qtm_data_matrix = qtm_data.to_numpy()
@@ -41,7 +41,7 @@ def get_qtm_data():
 	
 def get_zed_data():
 
-	file = 'zed_pose_data.txt'
+	file = paht + 'zed_pose_data.txt'
 
 	df = pandas.read_csv(file)
 	df_np = df.to_numpy()
@@ -57,10 +57,9 @@ def get_zed_data():
 	x, y, z = translate(x,y,z) #ONLY FOR VISUAL COMPARISON BEFORE CALIBRATION
 	return x, y, z
 
-
 def get_rift_data():
 
-	file = 'ORtracking_PositionAccelerationRotationData.txt'
+	file = path + 'ORtracking_PositionAccelerationRotationData.txt'
 
 	df = pandas.read_csv(file)
 	df_np = df.to_numpy()
@@ -88,11 +87,10 @@ def get_rift_data():
 	return x, y, z
 
 ### BODGE ###
-M = [[ 0.33857685,  0.58134524,  0.73986717], [-0.14988365, -0.74294619,  0.65235409], [-0.92892444,  0.33176599,  0.16441023]]
-t = [-0.71238922,  0.57661576, -0.04064198]
-M = np.array(M)
-t = np.array(t).transpose()
-
+#M = [[ 0.33857685,  0.58134524,  0.73986717], [-0.14988365, -0.74294619,  0.65235409], [-0.92892444,  0.33176599,  0.16441023]]
+#t = [-0.71238922,  0.57661576, -0.04064198]
+#M = np.array(M)
+#t = np.array(t).transpose()
 
 def plot_trajectories():
 
@@ -100,8 +98,9 @@ def plot_trajectories():
 	qtm_traj = np.array(qtm_traj)
 	qtm_traj = qtm_traj.transpose()
 
-	for i,_ in enumerate(qtm_traj):
-		qtm_traj[i] = (M.dot(qtm_traj[i]) + t).transpose()
+	### BODGE ###
+	#for i,_ in enumerate(qtm_traj):
+	#	qtm_traj[i] = (M.dot(qtm_traj[i]) + t).transpose()
 
 	qtm_traj = qtm_traj.transpose()
 

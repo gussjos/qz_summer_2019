@@ -4,15 +4,8 @@ from scipy.interpolate import interp1d
 import pandas
 from mpl_toolkits import mplot3d
 from collections import defaultdict
-import sys
-sys.path.insert(0, sys.path[0] + '/../smaple QTM OR ZED data')
-
-from read_and_plot_trajectories import get_qtm_data
-from read_and_plot_trajectories import get_rift_data
-
-#### BODGE ###
-#qtm_traj = get_qtm_data()
-#or_traj = get_rift_data()
+#from read_and_plot_trajectories import get_qtm_data
+#from read_and_plot_trajectories import get_rift_data
 
 def handpalaggning(qtm_traj_var, or_traj_var): #BODGE
 	plt.figure()
@@ -25,18 +18,17 @@ def handpalaggning(qtm_traj_var, or_traj_var): #BODGE
 	plt.legend(fontsize=22)
 	plt.show()
 
-
-#handpalaggning(qtm_traj, or_traj)
+#handpalaggning(get_qtm_data(), get_rift_data()) #BODGE
 
 def match_trajectories(qtm_traj, or_traj):#qtm/or_traj should be array with 3d vectors as rows
 	qtm_traj = np.array(qtm_traj)
 	or_traj = np.array(or_traj)
 
 	### BODGE ### TODO: find a way to do this using derivatives
-	I_qtm_first = 1000
-	I_qtm_last = 1665
-	I_or_first = 1419
-	I_or_last = 4376
+	I_qtm_first = 1483
+	I_qtm_last = 2351
+	I_or_first = 3085
+	I_or_last = 7824
 	
 
 	### remove data before and after actual trajectory ###
@@ -56,12 +48,12 @@ def match_trajectories(qtm_traj, or_traj):#qtm/or_traj should be array with 3d v
 		qtm_traj_matched[i] = f_qtm(t_common*(I_qtm_last-I_qtm_first)+I_qtm_first)
 		or_traj_matched[i] = f_or(t_common*(I_or_last-I_or_first)+I_or_first)
 
-	return qtm_traj_matched.transpose(), or_traj_matched.transpose()
+	return np.array(qtm_traj_matched), np.array(or_traj_matched)
 
 
 
-qtm_traj_matched, or_traj_matched = match_trajectories(get_qtm_data(), get_rift_data())
-handpalaggning(qtm_traj_matched, or_traj_matched)
+#qtm_traj_matched, or_traj_matched = match_trajectories(get_qtm_data(), get_rift_data()) #BODGE
+#handpalaggning(qtm_traj_matched, or_traj_matched)
 
 #def object_fun(M): #pseudocode
 #	sum = 0 #initiate
