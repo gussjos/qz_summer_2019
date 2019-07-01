@@ -48,7 +48,7 @@ def match_trajectories(qtm_traj, or_traj):#qtm/or_traj should be array with 3d v
 		qtm_traj_matched[i] = f_qtm(t_common*(I_qtm_last-I_qtm_first)+I_qtm_first)
 		or_traj_matched[i] = f_or(t_common*(I_or_last-I_or_first)+I_or_first)
 
-	return np.array(qtm_traj_matched), np.array(or_traj_matched)
+	return np.array(qtm_traj_matched).transpose(), np.array(or_traj_matched).transpose() #return list of row vectors
 
 
 

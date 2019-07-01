@@ -1,49 +1,82 @@
 import numpy as np
 from numpy import linalg
+import matplotlib.pyplot as plt
+from scipy.interpolate import interp1d
+import pandas
+from mpl_toolkits import mplot3d
+from collections import defaultdict
+#import sys
+#path = sys.path[0] + '/../sample_QTM-OR-ZED_data/'	#if running sample data
+#path = sys.path[0]									#if running like normal
 
-p1 = np.array([0.013849792670141492, 0.037808234669644704, 1.0084932462336589])
-q1 = np.array([0.08720056619036007, 1.0228535481550693, 0.005660490767391328])
-p2 = np.array([-0.11619744404668322, 0.8338395577844054, 0.9208249874837462])
-q2 = np.array([0.4166173894577574, 0.9041515981380953, 0.7412018000928503])
-p3 = np.array([-0.07347052396756322, 0.08244689438131277, 1.0256986393318832])
-q3 = np.array([0.040464792337801966, 1.048070735271747, 0.09690475540942207])
+from read_and_plot_trajectories import get_qtm_data
+from read_and_plot_trajectories import get_rift_data
+from read_and_plot_trajectories import plot_trajectories #BODGE
+from scale_and_match_trajectories import match_trajectories
+qtm_traj_matched, or_traj_matched = match_trajectories(get_qtm_data(), get_rift_data())
 
+def get_rotation_and_translation(pdata, qdata): #where p/qdata are lists of row vectors
+	pdata = np.array(pdata)
+	qdata = np.array(qdata)	
 
-#p1 = np.array([1, 2])
-#p2 = np.array([2, 1])
-#p3 = np.array([1, 1])
+	#define centroids
+	centroid_p = np.mean(pdata, axis=0)
+	centroid_q = np.mean(qdata, axis=0)
 
-#p_data = [p1, p2, p3]
+	#transform centroids to origin
+	pdata = pdata - centroid_p
 
-#t = np.array([100, 0])
-#M = np.array([[0, 1], [-1, 0]])
-#q_data = [[], [], []] #initiate
-#for i,p in enumeratye(p_data):
-#	q = M.dot(p) + t
-#	q_data[i] = q
+	H = np.zeros((3,3)) #initiate
+	for i,_ in enumerate(pdata[0]):
+		p = pdata[i,:]
+		q = qdata[i,:]
 
+		H += np.outer(p,q)
 
-#define centroids
-centroid_p = (p1 + p2 + p3)/3
-centroid_q = (q1 + q2 + q3)/3
-
-#transform centroids to origin
-p1 = p1 - centroid_p
-p2 = p2 - centroid_p
-p3 = p3 - centroid_p
-q1 = q1 - centroid_q
-q2 = q2 - centroid_q
-q3 = q3 - centroid_q
-
-
-H = np.outer(p1,q1) + np.outer(p2,q2) + np.outer(p3,q3)
-
-U, S, V = np.linalg.svd(H)
+	U, S, V = np.linalg.svd(H)
 
 
-R = V.dot(U.transpose())
-t = -R.dot(centroid_p) + centroid_q
+	R = V.dot(U.transpose())
+	t = -R.dot(centroid_p) + centroid_q
 
-print(R)
-print(t)
+	return R,t
 
+
+def plot_transformed_trajectories(pdata, qdata):
+	R, t = get_rotation_and_translation(pdata, qdata)
+
+	### BODGE ###
+	pdata_transformed = np.zeros_like(qdata)
+	for i,p in enumerate(pdata):
+		#print(q)
+		pdata_transformed[i,:] = (R.dot(p) + t)
+	print(pdata_transformed)
+	or_traj = get_rift_data()
+#	zed_traj = get_zed_data()
+
+	### 3d-plot ###
+	fig = plt.figure()
+	ax = plt.axes(projection='3d')
+
+	x = pdata_transformed[:,0]
+	y = pdata_transformed[:,1]
+	z = pdata_transformed[:,2]
+	max_range = np.array([x.max()-x.min(), y.max()-y.min(), z.max()-z.min()]).max() / 2.0
+	mid_x = (x.max()+x.min()) * 0.5
+	mid_y = (y.max()+y.min()) * 0.5
+	mid_z = (z.max()+z.min()) * 0.5
+	ax.set_xlim(mid_x - max_range, mid_x + max_range)
+	ax.set_ylim(mid_y - max_range, mid_y + max_range)
+	ax.set_zlim(mid_z - max_range, mid_z + max_range)
+	plt.title('QTM, OR, & ZED trajectories')
+
+	ax.plot3D(x,y,z, color='r', label='QTM')
+	ax.plot3D(or_traj[0], or_traj[1], or_traj[2], color='b', label='OR')
+	#ax.plot3D(zed_traj[0], zed_traj[1], zed_traj[2], color='g', label='ZED')
+	plt.xlabel('x', fontsize=24)
+	plt.ylabel('y', fontsize=24)
+	plt.legend()
+	plt.show()
+
+
+plot_transformed_trajectories(qtm_traj_matched, or_traj_matched) #BODGE

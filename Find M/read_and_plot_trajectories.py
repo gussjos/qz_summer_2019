@@ -41,7 +41,7 @@ def get_qtm_data():
 	
 def get_zed_data():
 
-	file = paht + 'zed_pose_data.txt'
+	file = path + 'zed_pose_data.txt'
 
 	df = pandas.read_csv(file)
 	df_np = df.to_numpy()
@@ -86,12 +86,6 @@ def get_rift_data():
 	x, y, z = translate(x,y,z) #ONLY FOR VISUAL COMPARISON BEFORE CALIBRATION
 	return x, y, z
 
-### BODGE ###
-#M = [[ 0.33857685,  0.58134524,  0.73986717], [-0.14988365, -0.74294619,  0.65235409], [-0.92892444,  0.33176599,  0.16441023]]
-#t = [-0.71238922,  0.57661576, -0.04064198]
-#M = np.array(M)
-#t = np.array(t).transpose()
-
 def plot_trajectories():
 
 	qtm_traj = get_qtm_data()
@@ -99,9 +93,10 @@ def plot_trajectories():
 	qtm_traj = qtm_traj.transpose()
 
 	### BODGE ###
-	#for i,_ in enumerate(qtm_traj):
-	#	qtm_traj[i] = (M.dot(qtm_traj[i]) + t).transpose()
-
+	R = np.array([[0.38221699, 0.92062476, 0.07975096], [-0.63636707, 0.19965554, 0.74510041], [-0.67003516, 0.33554092, -0.66216702]])
+	t = np.array([-0.03394914, 0.22325696, 0.61104821])
+	for i,_ in enumerate(qtm_traj):
+		qtm_traj[i] = (R.dot(qtm_traj[i]) + t).transpose()
 	qtm_traj = qtm_traj.transpose()
 
 
