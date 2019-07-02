@@ -13,32 +13,24 @@ def translate(x,y,z): #translates a list of (x,y,z) coordinates so that the firs
 	z_translated = np.array([w - z[0] for w in z])
 
 	return x_translated,y_translated,z_translated
+	
+def get_qtm_data(): #depracated
+	file = path + 'QTMtracking_PositionRotationData.txt'
+	df = pandas.read_csv(file)
+	df_np = df.to_numpy()
 
-def get_qtm_data():
-
-	file = path + 'QTM_HMD_trajectory_6D.tsv'
-
-	qtm_data = pandas.read_csv(file, sep='\t')
-	qtm_data_matrix = qtm_data.to_numpy()
-	qtm_data = pandas.read_csv(file, sep='\t')
-
-	x = qtm_data_matrix[:, 0]/1000 #convert from mm to m
-	y = qtm_data_matrix[:, 1]/1000 #convert from mm to m
-	z = qtm_data_matrix[:, 2]/1000 #convert from mm to m
-
-	nbrFrames = len(qtm_data_matrix)
-
-	## qtm_rot contains the rotational matrix for every frame
-	qtm_rot = np.zeros((3,3,nbrFrames))
-
-	for i in range(0,2):
-	    for j in range(0, 2):
-	        qtm_rot[i,j] = qtm_data_matrix[:,6+i+j] # 5-16 contains rotation elements
+	x = df_np[:,0]
+	y = df_np[:,1]
+	z = df_np[:,2]
+	qx = df_np[:,3]
+	qy = df_np[:,4]
+	qz = df_np[:,5]
+	qw = df_np[:,6]
 
 	#x, y, z = translate(x,y,z) #ONLY FOR VISUAL COMPARISON BEFORE CALIBRATION
 	return np.array([x, y, z]).T #returns list of 3vectors ad row vectors
-	
-def get_zed_data():
+
+def get_zed_data(): #depracated
 
 	file = path + 'zed_pose_data.txt'
 
@@ -56,7 +48,7 @@ def get_zed_data():
 	#x, y, z = translate(x,y,z) #ONLY FOR VISUAL COMPARISON BEFORE CALIBRATION
 	return np.array([x, y, z]).T #returns list of 3vectors ad row vectors
 
-def get_rift_data():
+def get_rift_data(): #depracated 
 
 	file = path + 'ORtracking_PositionAccelerationRotationData.txt'
 
@@ -84,6 +76,54 @@ def get_rift_data():
 
 	#x, y, z = translate(x,y,z) #ONLY FOR VISUAL COMPARISON BEFORE CALIBRATION
 	return np.array([x, y, z]).T #returns list of 3vectors ad row vectors
+
+def get_qtm_rift_data(): #TODO: make more concise
+	qtm_file = path + 'QTMtracking_PositionRotationData.txt'
+	or_file = path + 'ORtracking_PositionAccelerationRotationData.txt'
+
+	df_qtm = pandas.read_csv(qtm_file)
+	df_np_qtm = df_qtm.to_numpy()
+	df_or = pandas.read_csv(or_file)
+	df_np_or = df_or.to_numpy()
+
+	x_qtm = df_np_qtm[:,0]
+	y_qtm = df_np_qtm[:,1]
+	z_qtm = df_np_qtm[:,2]
+	qx_qtm = df_np_qtm[:,3]
+	qy_qtm = df_np_qtm[:,4]
+	qz_qtm = df_np_qtm[:,5]
+	qw_qtm = df_np_qtm[:,6]
+	x_or = df_np_or[:,0]
+	y_or = df_np_or[:,1]
+	z_or = df_np_or[:,2]
+	qx_or = df_np_or[:,3]
+	qy_or = df_np_or[:,4]
+	qz_or = df_np_or[:,5]
+	qw_or = df_np_or[:,6]
+
+	### Remove all the (0.0, 0.0, 0.0):s ###
+	index_array = [] #initiate
+	for index,_ in enumerate(x_or):
+		if (x_or[index]==0.0) * (y_or[index]==0.0) * (z_or[index]==0.0):
+			index_array.append(index)
+
+	x_or = np.delete(x_or,index_array)
+	y_or = np.delete(y_or,index_array)
+	z_or = np.delete(z_or,index_array)
+	x_qtm = np.delete(x_qtm,index_array)
+	y_qtm = np.delete(y_qtm,index_array)
+	z_qtm = np.delete(z_qtm,index_array)
+
+	start_index = 1000 #remove first N frames
+	x_or = x_or[start_index:-1]
+	y_or = y_or[start_index:-1]
+	z_or = z_or[start_index:-1]
+	x_qtm = x_qtm[start_index:-1]
+	y_qtm = y_qtm[start_index:-1]
+	z_qtm = z_qtm[start_index:-1]
+
+	#x, y, z = translate(x,y,z) #ONLY FOR VISUAL COMPARISON BEFORE CALIBRATION
+	return np.array([x_qtm, y_qtm, z_qtm]).T, np.array([x_or, y_or, z_or]).T #returns list of 3vectors ad row vectors
 
 def plot_trajectories(): #TODO: plot_trajectories(qtm_traj, or_traj, zed_traj) makes more sense
 

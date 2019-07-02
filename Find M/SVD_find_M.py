@@ -3,9 +3,10 @@ import matplotlib.pyplot as plt
 from scipy.interpolate import interp1d
 import pandas
 from mpl_toolkits import mplot3d
-from read_and_plot_trajectories import get_qtm_data, get_rift_data
-from scale_and_match_trajectories import match_trajectories
-qtm_traj_matched, or_traj_matched = match_trajectories(get_qtm_data(), get_rift_data())
+#from read_and_plot_trajectories import get_qtm_data, get_rift_data
+from read_and_plot_trajectories import get_qtm_rift_data
+#from scale_and_match_trajectories import match_trajectories
+#qtm_traj_matched, or_traj_matched = match_trajectories(get_qtm_data(), get_rift_data())
 
 def get_rotation_and_translation(qdata, pdata): # finds R & t in eq  p=Rq+t where p/qdata are lists of row vectors
 	qdata = np.array(qdata)
@@ -39,13 +40,9 @@ def plot_transformed_trajectories(qdata, pdata): #p=Rq+t
 	for i,q in enumerate(qdata):
 		qdata_transformed[i] = R.dot(q) + t
 
-	###Root Mean Square Error ###
-	q_data_matched, p_data_matched = match_trajectories(get_qtm_data(), get_rift_data())
-	q_data_matched_transformed = np.zeros_like(q_data_matched) #initiate
-	for i,q in enumerate(q_data_matched):
-		q_data_matched_transformed[i] = R.dot(q) + t
-	err = np.sum(np.sum((q_data_matched_transformed - p_data_matched)**2)) 
-	err_rms = np.sqrt(err/len(p_data_matched));
+	###Root Mean Square Error (assumes qdata & pdata matched)### 
+	err = np.sum(np.sum((qdata_transformed - pdata)**2))
+	err_rms = np.sqrt(err/len(pdata));
 	print('RMS error: ' + str(round(err_rms, 4)))
 
 	### 3d-plot ###
@@ -71,8 +68,9 @@ def plot_transformed_trajectories(qdata, pdata): #p=Rq+t
 	plt.legend()
 	plt.show()
 
-plot_transformed_trajectories(qtm_traj_matched, or_traj_matched)
-R, t = get_rotation_and_translation(qtm_traj_matched, or_traj_matched)
+qtm_data, or_data = get_qtm_rift_data()
+plot_transformed_trajectories(qtm_data, or_data)
+R, t = get_rotation_and_translation(qtm_data, or_data)
 filename = 'RotationFromCalibration.txt'
 np.savetxt(filename, R)
 filename = 'TranslationFromCalibration.txt'
