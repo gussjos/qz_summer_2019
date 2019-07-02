@@ -27,7 +27,6 @@ def get_rotation_and_translation(qdata, pdata): # finds R & t in eq  p=Rq+t wher
 
 	U, S, Vt = np.linalg.svd(H)
 	V = Vt.T
-
 	R = V.dot(U.T)
 	t = centroid_p - R.dot(centroid_q) #p=Rq+t
 
@@ -38,11 +37,15 @@ def plot_transformed_trajectories(qdata, pdata): #p=Rq+t
 	
 	qdata_transformed = np.zeros_like(qdata) #initiate
 	for i,q in enumerate(qdata):
-		qdata_transformed[i,:] = R.dot(q) + t
+		qdata_transformed[i] = R.dot(q) + t
 
 	###Root Mean Square Error ###
-	err = np.sum(np.sum((qdata_transformed - pdata)**2)) 
-	err_rms = np.sqrt(err/len(pdata));
+	q_data_matched, p_data_matched = match_trajectories(get_qtm_data(), get_rift_data())
+	q_data_matched_transformed = np.zeros_like(q_data_matched) #initiate
+	for i,q in enumerate(q_data_matched):
+		q_data_matched_transformed[i] = R.dot(q) + t
+	err = np.sum(np.sum((q_data_matched_transformed - p_data_matched)**2)) 
+	err_rms = np.sqrt(err/len(p_data_matched));
 	print('RMS error: ' + str(round(err_rms, 4)))
 
 	### 3d-plot ###
@@ -68,6 +71,7 @@ def plot_transformed_trajectories(qdata, pdata): #p=Rq+t
 	plt.legend()
 	plt.show()
 
+plot_transformed_trajectories(qtm_traj_matched, or_traj_matched)
 R, t = get_rotation_and_translation(qtm_traj_matched, or_traj_matched)
 filename = 'RotationFromCalibration.txt'
 np.savetxt(filename, R)
