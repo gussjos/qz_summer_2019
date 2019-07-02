@@ -68,4 +68,8 @@ def plot_transformed_trajectories(qdata, pdata): #p=Rq+t
 	plt.legend()
 	plt.show()
 
-plot_transformed_trajectories(qtm_traj_matched, or_traj_matched)
+R, t = get_rotation_and_translation(qtm_traj_matched, or_traj_matched)
+filename = 'RotationFromCalibration.txt'
+np.savetxt(filename, R)
+filename = 'TranslationFromCalibration.txt'
+np.savetxt(filename, t)

@@ -50,7 +50,7 @@ R = U*Vt
 # remove reflection
 if linalg.det(R) < 0:
    Vt[2,:] *= -1
-   R = U*Vt
+   R = U*Vt  
 
 # number of points
 n = 10

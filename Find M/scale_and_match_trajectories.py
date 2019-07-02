@@ -13,7 +13,7 @@ def handpalaggning(qtm_traj_var, or_traj_var): #BODGE
 	plt.plot(or_traj_var[0] - or_traj_var[0][0], 'b:', label='x(t) OR')
 	plt.plot(or_traj_var[1] - or_traj_var[1][0], 'g:', label='y(t) OR')
 	plt.plot(or_traj_var[2] - or_traj_var[2][0], 'r:', label='z(t) OR')
-	plt.legend(fontsize=22)
+	plt.legend(fontsize=16)
 	plt.show()
 
 #handpalaggning(get_qtm_data(), get_rift_data()) #BODGE
@@ -23,10 +23,10 @@ def match_trajectories(qtm_traj, or_traj):#qtm/or_traj should be array with 3d v
 	or_traj = np.array(or_traj)
 
 	### BODGE ### TODO: find a way to do this using derivatives
-	I_qtm_first = 1284#1483
-	I_qtm_last = 8370#2351
-	I_or_first = 1920#3085
-	I_or_last = 19775#7824
+	I_qtm_first = 1453#1483
+	I_qtm_last = 5519#2351
+	I_or_first = 4044#3085
+	I_or_last = 21568#7824
 
 	### remove data before and after actual trajectory ###
 	qtm_traj = qtm_traj[:,I_qtm_first:I_qtm_last]
@@ -45,9 +45,10 @@ def match_trajectories(qtm_traj, or_traj):#qtm/or_traj should be array with 3d v
 		qtm_traj_matched[i] = f_qtm(t_common*(I_qtm_last-I_qtm_first)+I_qtm_first)
 		or_traj_matched[i] = f_or(t_common*(I_or_last-I_or_first)+I_or_first)
 
-	return np.array(qtm_traj_matched).transpose(), np.array(or_traj_matched).transpose() #return list of row vectors
+	return np.array(qtm_traj_matched), np.array(or_traj_matched) #return list of row vectors
 
-
+qtm_data_matched, or_data_matched = match_trajectories(get_qtm_data(), get_rift_data()) #BODGE
+handpalaggning(qtm_data_matched, or_data_matched) #BODGE
 
 
 
