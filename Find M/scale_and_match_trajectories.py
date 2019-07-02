@@ -1,11 +1,9 @@
-import matplotlib.pyplot as plt
 import numpy as np
+import matplotlib.pyplot as plt
 from scipy.interpolate import interp1d
 import pandas
 from mpl_toolkits import mplot3d
-from collections import defaultdict
-from read_and_plot_trajectories import get_qtm_data #BODGE
-from read_and_plot_trajectories import get_rift_data #BODGE
+from read_and_plot_trajectories import get_qtm_data, get_rift_data #BODGE
 
 def handpalaggning(qtm_traj_var, or_traj_var): #BODGE
 	plt.figure()
@@ -29,7 +27,6 @@ def match_trajectories(qtm_traj, or_traj):#qtm/or_traj should be array with 3d v
 	I_qtm_last = 8370#2351
 	I_or_first = 1920#3085
 	I_or_last = 19775#7824
-	
 
 	### remove data before and after actual trajectory ###
 	qtm_traj = qtm_traj[:,I_qtm_first:I_qtm_last]
@@ -49,26 +46,6 @@ def match_trajectories(qtm_traj, or_traj):#qtm/or_traj should be array with 3d v
 		or_traj_matched[i] = f_or(t_common*(I_or_last-I_or_first)+I_or_first)
 
 	return np.array(qtm_traj_matched).transpose(), np.array(or_traj_matched).transpose() #return list of row vectors
-
-
-
-#qtm_traj_matched, or_traj_matched = match_trajectories(get_qtm_data(), get_rift_data()) #BODGE
-#handpalaggning(qtm_traj_matched, or_traj_matched)
-
-#def object_fun(M): #pseudocode
-#	sum = 0 #initiate
-#	sum += np.trapz(abs((r_OR - M r_QTM)^2))
-#	return sum
-
-#print('p1 = ' + str(qtm_traj_matched[0][4000]) + ', ' + str(qtm_traj_matched[1][4000]) + ', ' + str(qtm_traj_matched[2][4000]))
-#print('q1 = ' + str(or_traj_matched[0][4000]) + ', ' + str(or_traj_matched[1][4000]) + ', ' + str(or_traj_matched[2][4000]))
-
-#print('p2 = ' + str(qtm_traj_matched[0][6000]) + ', ' + str(qtm_traj_matched[1][6000]) + ', ' + str(qtm_traj_matched[2][6000]))
-#print('q2 = ' + str(or_traj_matched[0][6000]) + ', ' + str(or_traj_matched[1][6000]) + ', ' + str(or_traj_matched[2][6000]))
-
-#print('p3 = ' + str(qtm_traj_matched[0][8000]) + ', ' + str(qtm_traj_matched[1][8000]) + ', ' + str(qtm_traj_matched[2][8000]))
-#print('q3 = ' + str(or_traj_matched[0][8000]) + ', ' + str(or_traj_matched[1][8000]) + ', ' + str(or_traj_matched[2][8000]))
-
 
 
 

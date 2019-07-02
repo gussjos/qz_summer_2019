@@ -85,19 +85,11 @@ def get_rift_data():
 	#x, y, z = translate(x,y,z) #ONLY FOR VISUAL COMPARISON BEFORE CALIBRATION
 	return x, y, z
 
-def plot_trajectories():
+def plot_trajectories(): #TODO: plot_trajectories(qtm_traj, or_traj, zed_traj) makes more sense
 
 	qtm_traj = get_qtm_data()
 	qtm_traj = np.array(qtm_traj)
 	qtm_traj = qtm_traj.transpose()
-
-	### BODGE ###
-#	R = np.array([[0.38221699, 0.92062476, 0.07975096], [-0.63636707, 0.19965554, 0.74510041], [-0.67003516, 0.33554092, -0.66216702]])
-#	t = np.array([-0.03394914, 0.22325696, 0.61104821])
-#	for i,_ in enumerate(qtm_traj):
-#		qtm_traj[i] = (R.dot(qtm_traj[i]) + t).transpose()
-#	qtm_traj = qtm_traj.transpose()
-
 
 	or_traj = get_rift_data()
 	zed_traj = get_zed_data()
@@ -125,11 +117,6 @@ def plot_trajectories():
 	plt.ylabel('y', fontsize=24)
 	plt.legend()
 	plt.show()
-
-
-#plot_trajectories()
-
-
 
 
 
