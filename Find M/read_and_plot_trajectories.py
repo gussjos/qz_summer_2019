@@ -4,7 +4,8 @@ import pandas
 from mpl_toolkits import mplot3d
 from collections import defaultdict
 import sys
-#sys.path.insert(0, sys.path[0] + '/../smaple QTM OR ZED data')
+#path = sys.path[0] + '/../sample_QTM-OR-ZED_data/'	#if running sample data
+path = sys.path[0] + '/'							#if running like normal
 
 def translate(x,y,z): #translates a list of (x,y,z) coordinates so that the first one is the origin
 	x_translated = np.array([u - x[0] for u in x])
@@ -13,10 +14,9 @@ def translate(x,y,z): #translates a list of (x,y,z) coordinates so that the firs
 
 	return x_translated,y_translated,z_translated
 
-
 def get_qtm_data():
 
-	file = 'QTM_HMD_tracking_20190627_6D.tsv'
+	file = path + 'QTM_HMD_trajectory_6D.tsv'
 
 	qtm_data = pandas.read_csv(file, sep='\t')
 	qtm_data_matrix = qtm_data.to_numpy()
@@ -35,13 +35,12 @@ def get_qtm_data():
 	    for j in range(0, 2):
 	        qtm_rot[i,j] = qtm_data_matrix[:,6+i+j] # 5-16 contains rotation elements
 
-	x, y, z = translate(x,y,z) #ONLY FOR VISUAL COMPARISON BEFORE CALIBRATION
+	#x, y, z = translate(x,y,z) #ONLY FOR VISUAL COMPARISON BEFORE CALIBRATION
 	return x, y, z
-
 	
 def get_zed_data():
 
-	file = 'zed_pose_data.txt'
+	file = path + 'zed_pose_data.txt'
 
 	df = pandas.read_csv(file)
 	df_np = df.to_numpy()
@@ -54,13 +53,12 @@ def get_zed_data():
 	qz = df_np[:,5]
 	qw = df_np[:,6]
 
-	x, y, z = translate(x,y,z) #ONLY FOR VISUAL COMPARISON BEFORE CALIBRATION
+	#x, y, z = translate(x,y,z) #ONLY FOR VISUAL COMPARISON BEFORE CALIBRATION
 	return x, y, z
-
 
 def get_rift_data():
 
-	file = 'ORtracking_PositionAccelerationRotationData.txt'
+	file = path + 'ORtracking_PositionAccelerationRotationData.txt'
 
 	df = pandas.read_csv(file)
 	df_np = df.to_numpy()
@@ -107,13 +105,15 @@ def plotTrajectories():
 	y = np.delete(y,index_array)
 	z = np.delete(z,index_array)
 
-	x, y, z = translate(x,y,z) #ONLY FOR VISUAL COMPARISON BEFORE CALIBRATION
+	#x, y, z = translate(x,y,z) #ONLY FOR VISUAL COMPARISON BEFORE CALIBRATION
 	return x, y, z
 
-
-def plot_trajectories():
+def plot_trajectories(): #TODO: plot_trajectories(qtm_traj, or_traj, zed_traj) makes more sense
 
 	qtm_traj = get_qtm_data()
+	qtm_traj = np.array(qtm_traj)
+	qtm_traj = qtm_traj.transpose()
+
 	or_traj = get_rift_data()
 	zed_traj = get_zed_data()
 
@@ -141,10 +141,6 @@ def plot_trajectories():
 
 	plt.legend()
 	plt.show()
-
-
-
-
 
 
 
