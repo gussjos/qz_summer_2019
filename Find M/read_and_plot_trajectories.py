@@ -36,7 +36,7 @@ def get_qtm_data():
 	        qtm_rot[i,j] = qtm_data_matrix[:,6+i+j] # 5-16 contains rotation elements
 
 	#x, y, z = translate(x,y,z) #ONLY FOR VISUAL COMPARISON BEFORE CALIBRATION
-	return x, y, z
+	return np.array([x, y, z]).T #returns list of 3vectors ad row vectors
 	
 def get_zed_data():
 
@@ -54,7 +54,7 @@ def get_zed_data():
 	qw = df_np[:,6]
 
 	#x, y, z = translate(x,y,z) #ONLY FOR VISUAL COMPARISON BEFORE CALIBRATION
-	return x, y, z
+	return np.array([x, y, z]).T #returns list of 3vectors ad row vectors
 
 def get_rift_data():
 
@@ -106,16 +106,13 @@ def plotTrajectories():
 	z = np.delete(z,index_array)
 
 	#x, y, z = translate(x,y,z) #ONLY FOR VISUAL COMPARISON BEFORE CALIBRATION
-	return x, y, z
+	return np.array([x, y, z]).T #returns list of 3vectors ad row vectors
 
 def plot_trajectories(): #TODO: plot_trajectories(qtm_traj, or_traj, zed_traj) makes more sense
 
-	qtm_traj = get_qtm_data()
-	qtm_traj = np.array(qtm_traj)
-	qtm_traj = qtm_traj.transpose()
-
-	or_traj = get_rift_data()
-	zed_traj = get_zed_data()
+	qtm_traj = get_qtm_data().T
+	or_traj = get_rift_data().T
+	zed_traj = get_zed_data().T
 
 	### 3d-plot ###
 	fig = plt.figure()

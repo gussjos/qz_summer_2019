@@ -8,20 +8,20 @@ from find_first_and_last_frames import return_indices
 
 def handpalaggning(qtm_traj_var, or_traj_var): #BODGE
 	plt.figure()
-	plt.plot(qtm_traj_var[0] - qtm_traj_var[0][0], 'b', label='x(t) QTM')
-	plt.plot(qtm_traj_var[1] - qtm_traj_var[1][0], 'g', label='y(t) QTM')
-	plt.plot(qtm_traj_var[2] - qtm_traj_var[2][2], 'r', label='z(t) QTM')
-	plt.plot(or_traj_var[0] - or_traj_var[0][0], 'b:', label='x(t) OR')
-	plt.plot(or_traj_var[1] - or_traj_var[1][0], 'g:', label='y(t) OR')
-	plt.plot(or_traj_var[2] - or_traj_var[2][0], 'r:', label='z(t) OR')
+	plt.plot(qtm_traj_var[:,0] - qtm_traj_var[0][0], 'b', label='x(t) QTM')
+	plt.plot(qtm_traj_var[:,1] - qtm_traj_var[0][1], 'g', label='y(t) QTM')
+	plt.plot(qtm_traj_var[:,2] - qtm_traj_var[0][2], 'r', label='z(t) QTM')
+	plt.plot(or_traj_var[:,0] - or_traj_var[0][0], 'b:', label='x(t) OR')
+	plt.plot(or_traj_var[:,1] - or_traj_var[0][1], 'g:', label='y(t) OR')
+	plt.plot(or_traj_var[:,2] - or_traj_var[0][2], 'r:', label='z(t) OR')
 	plt.legend(fontsize=16)
 	plt.show()
 
 #handpalaggning(get_qtm_data(), get_rift_data()) #BODGE
 
 def match_trajectories(qtm_traj, or_traj):#qtm/or_traj should be array with 3d vectors as rows
-	qtm_traj = np.array(qtm_traj)
-	or_traj = np.array(or_traj)
+	qtm_traj = np.array(qtm_traj).T #we need column vectors for this specific method
+	or_traj = np.array(or_traj).T
 
 	### BODGE ### TODO: find a way to do this using derivatives
 
@@ -51,11 +51,10 @@ def match_trajectories(qtm_traj, or_traj):#qtm/or_traj should be array with 3d v
 		qtm_traj_matched[i] = f_qtm(t_common*(I_qtm_last-I_qtm_first)+I_qtm_first)
 		or_traj_matched[i] = f_or(t_common*(I_or_last-I_or_first)+I_or_first)
 
-	return np.array(qtm_traj_matched), np.array(or_traj_matched) #return list of row vectors
+	return np.array(qtm_traj_matched).T, np.array(or_traj_matched).T #return list of row vectors
 
-qtm_data_matched, or_data_matched = match_trajectories(get_qtm_data(), get_rift_data()) #BODGE
-# handpalaggning(qtm_data_matched, or_data_matched) #BODGE
-
+#qtm_data_matched, or_data_matched = match_trajectories(get_qtm_data(), get_rift_data()) #BODGE
+#handpalaggning(qtm_data_matched, or_data_matched) #BODGE
 
 
 
