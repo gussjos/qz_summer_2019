@@ -10,12 +10,12 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Find M/read_and_plot_trajectories.py">
+        <entry file="file://$PROJECT_DIR$/Find M/SVD_find_M.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="16" column="16" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="16" />
+            <state relative-caret-position="89">
+              <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
               <folding>
-                <element signature="e#0#31#0" expanded="true" />
+                <element signature="e#0#18#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -24,8 +24,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Find M/scale_and_match_trajectories.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="344">
-              <caret line="28" column="24" lean-forward="true" selection-start-line="28" selection-start-column="24" selection-end-line="28" selection-end-column="24" />
+            <state relative-caret-position="12">
+              <caret line="21" column="22" selection-start-line="21" selection-start-column="4" selection-end-line="21" selection-end-column="22" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -36,8 +36,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Find M/find_first_and_last_frames.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="263">
-              <caret line="58" lean-forward="true" selection-start-line="58" selection-end-line="58" />
+            <state relative-caret-position="306">
+              <caret line="38" column="25" selection-start-line="38" selection-start-column="25" selection-end-line="38" selection-end-column="25" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -60,10 +60,16 @@
       <find>plot_transformed_trajectories</find>
       <find>qtm_traj_matched</find>
       <find>rift_data</find>
-      <find>get_qtm_data</find>
       <find>get</find>
       <find>search_index</find>
       <find>handpalaggning</find>
+      <find>match_traj</find>
+      <find>return_indic</find>
+      <find>I_or_first</find>
+      <find>I_rift</find>
+      <find>print</find>
+      <find>get_qtm_data</find>
+      <find>match_trajectories</find>
     </findStrings>
     <replaceStrings>
       <replace>rift_trajectory</replace>
@@ -84,8 +90,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="951" />
-    <option name="y" value="477" />
+    <option name="x" value="-9" />
+    <option name="y" value="-9" />
     <option name="width" value="1750" />
     <option name="height" value="980" />
   </component>
@@ -100,6 +106,16 @@
             <path>
               <item name="qz_summer_2019" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
               <item name="C:\Users\gussjo\OneDrive - Zenuity\Documents\GitHub\qz_summer_2019" type="442cc68d:ScopeViewTreeModel$RootNode" />
+            </path>
+            <path>
+              <item name="qz_summer_2019" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="C:\Users\gussjo\OneDrive - Zenuity\Documents\GitHub\qz_summer_2019" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="Find M" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="qz_summer_2019" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="C:\Users\gussjo\OneDrive - Zenuity\Documents\GitHub\qz_summer_2019" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="sample_QTM-OR-ZED_data" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
           </expand>
           <select />
@@ -148,7 +164,28 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.find_first_and_last_frames">
+  <component name="RunManager" selected="Python.SVD_find_M">
+    <configuration name="SVD_find_M" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="qz_summer_2019" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\gussjo\AppData\Local\Programs\Python\Python37\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Find M" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Find M/SVD_find_M.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="SVD_find_M_test" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="qz_summer_2019" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -212,27 +249,6 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="read&amp;plot_trajectories" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="qz_summer_2019" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Find M" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="C:\Users\gussjo\OneDrive - Zenuity\Documents\GitHub\qz_summer_2019\Find M\read_and_plot_trajectories.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <configuration name="scale_and_match_trajectories" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="qz_summer_2019" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -255,19 +271,19 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python.read&amp;plot_trajectories" />
       <item itemvalue="Python.read_and_plot_trajectories" />
       <item itemvalue="Python.scale_and_match_trajectories" />
       <item itemvalue="Python.SVD_find_M_test" />
       <item itemvalue="Python.find_first_and_last_frames" />
+      <item itemvalue="Python.SVD_find_M" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.SVD_find_M" />
         <item itemvalue="Python.find_first_and_last_frames" />
         <item itemvalue="Python.scale_and_match_trajectories" />
         <item itemvalue="Python.read_and_plot_trajectories" />
         <item itemvalue="Python.SVD_find_M_test" />
-        <item itemvalue="Python.read&amp;plot_trajectories" />
       </list>
     </recent_temporary>
   </component>
@@ -281,12 +297,12 @@
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24966975" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24966975" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.37765205" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.37765205" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39886847" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -308,10 +324,15 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/sample_QTM-OR-ZED_data/ORtracking_PositionAccelerationRotationData.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-54" />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Find M/read_and_plot_trajectories.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="16" column="16" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="16" />
+        <state relative-caret-position="236">
+          <caret line="86" column="49" selection-start-line="86" selection-start-column="49" selection-end-line="86" selection-end-column="49" />
           <folding>
             <element signature="e#0#31#0" expanded="true" />
           </folding>
@@ -320,8 +341,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Find M/scale_and_match_trajectories.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="344">
-          <caret line="28" column="24" lean-forward="true" selection-start-line="28" selection-start-column="24" selection-end-line="28" selection-end-column="24" />
+        <state relative-caret-position="12">
+          <caret line="21" column="22" selection-start-line="21" selection-start-column="4" selection-end-line="21" selection-end-column="22" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Find M/SVD_find_M.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="89">
+          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
@@ -330,8 +361,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Find M/find_first_and_last_frames.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="263">
-          <caret line="58" lean-forward="true" selection-start-line="58" selection-end-line="58" />
+        <state relative-caret-position="306">
+          <caret line="38" column="25" selection-start-line="38" selection-start-column="25" selection-end-line="38" selection-end-column="25" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>

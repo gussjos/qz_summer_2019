@@ -4,6 +4,7 @@ from scipy.interpolate import interp1d
 import pandas
 from mpl_toolkits import mplot3d
 from read_and_plot_trajectories import get_qtm_data, get_rift_data #BODGE
+from find_first_and_last_frames import return_indices
 
 def handpalaggning(qtm_traj_var, or_traj_var): #BODGE
 	plt.figure()
@@ -16,19 +17,6 @@ def handpalaggning(qtm_traj_var, or_traj_var): #BODGE
 	plt.legend(fontsize=16)
 	plt.show()
 
-def plot_unscaled_trajectory(trajectory,first_index): #BODGE
-	plt.figure()
-	plt.plot(trajectory[0] - trajectory[0][0], 'b', label='x(t)')
-	plt.plot(trajectory[1] - trajectory[1][0], 'g', label='y(t)')
-	plt.plot(trajectory[2] - trajectory[2][2], 'r', label='z(t)')
-	plt.legend(fontsize=16)
-	if first_index == 1:
-		plt.title('Please choose starting index',fontsize = 22)
-	elif first_index == 0:
-		plt.title('Please choose final index',fontsize = 22)
-	return plt.ginput(1)
-	plt.show()
-
 #handpalaggning(get_qtm_data(), get_rift_data()) #BODGE
 
 def match_trajectories(qtm_traj, or_traj):#qtm/or_traj should be array with 3d vectors as rows
@@ -36,10 +24,15 @@ def match_trajectories(qtm_traj, or_traj):#qtm/or_traj should be array with 3d v
 	or_traj = np.array(or_traj)
 
 	### BODGE ### TODO: find a way to do this using derivatives
-	I_qtm_first = 1453#1483
-	I_qtm_last = 5519#2351
-	I_or_first = 4044#3085
-	I_or_last = 21568#7824
+
+	## importera return_indices
+
+	tol = 0.1 # change if weird indices are found
+	I_qtm_first, I_qtm_last = return_indices(qtm_traj,tol)
+	print('qtm indices: ' + str(I_qtm_first) + ", " + str(I_qtm_last))
+
+	I_or_first, I_or_last = return_indices(or_traj,tol)
+	print('rift indices: ' + str(I_or_first) + ", " + str(I_or_last))
 
 	### remove data before and after actual trajectory ###
 	qtm_traj = qtm_traj[:,I_qtm_first:I_qtm_last]
