@@ -16,6 +16,19 @@ def handpalaggning(qtm_traj_var, or_traj_var): #BODGE
 	plt.legend(fontsize=16)
 	plt.show()
 
+def plot_unscaled_trajectory(trajectory,first_index): #BODGE
+	plt.figure()
+	plt.plot(trajectory[0] - trajectory[0][0], 'b', label='x(t)')
+	plt.plot(trajectory[1] - trajectory[1][0], 'g', label='y(t)')
+	plt.plot(trajectory[2] - trajectory[2][2], 'r', label='z(t)')
+	plt.legend(fontsize=16)
+	if first_index == 1:
+		plt.title('Please choose starting index',fontsize = 22)
+	elif first_index == 0:
+		plt.title('Please choose final index',fontsize = 22)
+	return plt.ginput(1)
+	plt.show()
+
 #handpalaggning(get_qtm_data(), get_rift_data()) #BODGE
 
 def match_trajectories(qtm_traj, or_traj):#qtm/or_traj should be array with 3d vectors as rows
@@ -48,7 +61,7 @@ def match_trajectories(qtm_traj, or_traj):#qtm/or_traj should be array with 3d v
 	return np.array(qtm_traj_matched), np.array(or_traj_matched) #return list of row vectors
 
 qtm_data_matched, or_data_matched = match_trajectories(get_qtm_data(), get_rift_data()) #BODGE
-handpalaggning(qtm_data_matched, or_data_matched) #BODGE
+# handpalaggning(qtm_data_matched, or_data_matched) #BODGE
 
 
 
