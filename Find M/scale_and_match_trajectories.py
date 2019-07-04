@@ -23,10 +23,19 @@ def match_trajectories(qtm_traj, or_traj):#qtm/or_traj should be array with 3d v
 	or_traj = np.array(or_traj).T
 
 	### BODGE ### TODO: find a way to do this using derivatives
-	I_qtm_first = 1598
-	I_qtm_last = 3361
-	I_or_first = 2834
-	I_or_last = 9343
+
+	## importera return_indices
+
+	tol = 0.1 # change if weird indices are found
+	I_qtm_first, I_qtm_last = return_indices(qtm_traj,tol)
+	print('qtm indices: ' + str(I_qtm_first) + ", " + str(I_qtm_last))
+
+	# print(qtm_traj)
+
+	I_or_first, I_or_last = return_indices(or_traj,tol)
+	print(or_traj)
+	print('rift indices: ' + str(I_or_first) + ", " + str(I_or_last))
+
 
 	### remove data before and after actual trajectory ###
 	qtm_traj = qtm_traj[:,I_qtm_first:I_qtm_last]

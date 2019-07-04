@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="11e1672a-ff87-4622-97bd-611bcf6ca3f3" name="Default Changelist" comment="" />
+    <list default="true" id="11e1672a-ff87-4622-97bd-611bcf6ca3f3" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Find M/find_first_and_last_frames.py" beforeDir="false" afterPath="$PROJECT_DIR$/Find M/find_first_and_last_frames.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Find M/scale_and_match_trajectories.py" beforeDir="false" afterPath="$PROJECT_DIR$/Find M/scale_and_match_trajectories.py" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -11,6 +16,7 @@
     <leaf>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Find M/read_and_plot_trajectories.py">
+<<<<<<< Updated upstream
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="198">
               <caret line="58" column="89" lean-forward="true" selection-start-line="58" selection-start-column="89" selection-end-line="59" />
@@ -18,6 +24,24 @@
                 <element signature="e#0#31#0" expanded="true" />
                 <element signature="e#1017#1489#0" />
                 <element signature="e#1515#2226#0" />
+=======
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1044">
+              <caret line="63" column="25" selection-start-line="63" selection-start-column="25" selection-end-line="63" selection-end-column="25" />
+              <folding>
+                <element signature="e#0#31#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Find M/SVD_find_M.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-655">
+              <caret line="27" column="31" lean-forward="true" selection-start-line="27" selection-start-column="31" selection-end-line="27" selection-end-column="31" />
+              <folding>
+                <element signature="e#0#18#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -26,8 +50,29 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Find M/scale_and_match_trajectories.py">
           <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="146">
+              <caret line="29" column="49" lean-forward="true" selection-start-line="29" selection-start-column="49" selection-end-line="29" selection-end-column="49" />
+              <folding>
+                <element signature="e#0#18#0" expanded="true" />
+>>>>>>> Stashed changes
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+<<<<<<< Updated upstream
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Find M/scale_and_match_trajectories.py">
+          <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="180">
               <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
+=======
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Find M/find_first_and_last_frames.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="218">
+              <caret line="73" column="34" lean-forward="true" selection-start-line="73" selection-start-column="34" selection-end-line="73" selection-end-column="34" />
+>>>>>>> Stashed changes
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
               </folding>
@@ -44,6 +89,32 @@
       </list>
     </option>
   </component>
+<<<<<<< Updated upstream
+=======
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>get_rotation_and_translation</find>
+      <find>plot_transformed_trajectories</find>
+      <find>qtm_traj_matched</find>
+      <find>rift_data</find>
+      <find>get</find>
+      <find>search_index</find>
+      <find>match_traj</find>
+      <find>return_indic</find>
+      <find>I_or_first</find>
+      <find>I_rift</find>
+      <find>print</find>
+      <find>get_qtm_data</find>
+      <find>plt.plot</find>
+      <find>match_trajectories</find>
+      <find>handpalaggning</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>rift_trajectory</replace>
+      <replace>start_index_for_search</replace>
+    </replaceStrings>
+  </component>
+>>>>>>> Stashed changes
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -51,10 +122,35 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/Find M/read&amp;plot_trajectories.py" />
+<<<<<<< Updated upstream
         <option value="$PROJECT_DIR$/Find M/scale_and_match_trajectories.py" />
       </list>
     </option>
   </component>
+=======
+        <option value="$PROJECT_DIR$/Find M/read_and_plot_trajectories.py" />
+        <option value="$PROJECT_DIR$/Find M/find_first_and_last_frames.py" />
+        <option value="$PROJECT_DIR$/Find M/scale_and_match_trajectories.py" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectConfigurationFiles">
+    <option name="files">
+      <list>
+        <option value="$PROJECT_DIR$/.idea/qz_summer_2019.iml" />
+        <option value="$PROJECT_DIR$/.idea/misc.xml" />
+        <option value="$PROJECT_DIR$/.idea/vcs.xml" />
+        <option value="$PROJECT_DIR$/.idea/modules.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-10" />
+    <option name="y" value="-10" />
+    <option name="width" value="1750" />
+    <option name="height" value="980" />
+  </component>
+>>>>>>> Stashed changes
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
@@ -62,6 +158,8 @@
     <panes>
       <pane id="ProjectPane">
         <subPane>
+<<<<<<< Updated upstream
+=======
           <expand>
             <path>
               <item name="qz_summer_2019" type="b2602c69:ProjectViewProjectNode" />
@@ -76,6 +174,28 @@
               <item name="qz_summer_2019" type="b2602c69:ProjectViewProjectNode" />
               <item name="qz_summer_2019" type="462c0819:PsiDirectoryNode" />
               <item name="smaple QTM OR ZED data" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope">
+        <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
+>>>>>>> Stashed changes
+          <expand>
+            <path>
+              <item name="qz_summer_2019" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="C:\Users\gussjo\OneDrive - Zenuity\Documents\GitHub\qz_summer_2019" type="442cc68d:ScopeViewTreeModel$RootNode" />
+            </path>
+            <path>
+              <item name="qz_summer_2019" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="C:\Users\gussjo\OneDrive - Zenuity\Documents\GitHub\qz_summer_2019" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="Find M" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="qz_summer_2019" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="C:\Users\gussjo\OneDrive - Zenuity\Documents\GitHub\qz_summer_2019" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="sample_QTM-OR-ZED_data" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
           </expand>
           <select />
@@ -150,6 +270,13 @@
     <configuration />
   </component>
   <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="11e1672a-ff87-4622-97bd-611bcf6ca3f3" name="Default Changelist" comment="" />
+      <created>1562081819799</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1562081819799</updated>
+    </task>
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -165,11 +292,23 @@
       <window_info anchor="bottom" id="Event Log" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
+<<<<<<< Updated upstream
       <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32956153" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
+=======
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.7080581" visible="true" weight="0.37765205" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39886847" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.32956153" />
+      <window_info anchor="bottom" id="Python Console" order="9" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.29194188" side_tool="true" visible="true" weight="0.37765205" />
+>>>>>>> Stashed changes
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -187,10 +326,23 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
+<<<<<<< Updated upstream
     <entry file="file://$PROJECT_DIR$/Find M/read_and_plot_trajectories.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="198">
           <caret line="58" column="89" lean-forward="true" selection-start-line="58" selection-start-column="89" selection-end-line="59" />
+=======
+    <entry file="file://$PROJECT_DIR$/Find M/SVD_find_M_test.py" />
+    <entry file="file://$PROJECT_DIR$/sample_QTM-OR-ZED_data/ORtracking_PositionAccelerationRotationData.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-54" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Find M/read_and_plot_trajectories.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1044">
+          <caret line="63" column="25" selection-start-line="63" selection-start-column="25" selection-end-line="63" selection-end-column="25" />
+>>>>>>> Stashed changes
           <folding>
             <element signature="e#0#31#0" expanded="true" />
             <element signature="e#1017#1489#0" />
@@ -199,10 +351,35 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Find M/scale_and_match_trajectories.py">
+    <entry file="file://$PROJECT_DIR$/Find M/SVD_find_M.py">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< Updated upstream
         <state relative-caret-position="180">
           <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
+=======
+        <state relative-caret-position="-655">
+          <caret line="27" column="31" lean-forward="true" selection-start-line="27" selection-start-column="31" selection-end-line="27" selection-end-column="31" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Find M/find_first_and_last_frames.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="218">
+          <caret line="73" column="34" lean-forward="true" selection-start-line="73" selection-start-column="34" selection-end-line="73" selection-end-column="34" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Find M/scale_and_match_trajectories.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="146">
+          <caret line="29" column="49" lean-forward="true" selection-start-line="29" selection-start-column="49" selection-end-line="29" selection-end-column="49" />
+>>>>>>> Stashed changes
           <folding>
             <element signature="e#0#31#0" expanded="true" />
           </folding>
