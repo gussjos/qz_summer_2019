@@ -45,7 +45,7 @@ def get_zed_data(): #depracated
 	qz = df_np[:,5]
 	qw = df_np[:,6]
 
-	#x, y, z = translate(x,y,z) #ONLY FOR VISUAL COMPARISON BEFORE CALIBRATION
+	x, y, z = translate(x,y,z) #ONLY FOR VISUAL COMPARISON BEFORE CALIBRATION
 	return np.array([x, y, z]).T #returns list of 3vectors ad row vectors
 
 def get_rift_data(): #depracated 
@@ -74,12 +74,12 @@ def get_rift_data(): #depracated
 	y = np.delete(y,index_array)
 	z = np.delete(z,index_array)
 
-	#x, y, z = translate(x,y,z) #ONLY FOR VISUAL COMPARISON BEFORE CALIBRATION
+	x, y, z = translate(x,y,z) #ONLY FOR VISUAL COMPARISON BEFORE CALIBRATION
 	return np.array([x, y, z]).T #returns list of 3vectors ad row vectors
 
 def get_qtm_rift_data(): #TODO: make more concise
 	qtm_file = path + 'QTMtracking_PositionRotationData.txt'
-	or_file = path + 'ORtracking_PositionAccelerationRotationData.txt'
+	or_file = path + 'ORtracking_PositionRotationData.txt'
 
 	df_qtm = pandas.read_csv(qtm_file)
 	df_np_qtm = df_qtm.to_numpy()
@@ -122,7 +122,9 @@ def get_qtm_rift_data(): #TODO: make more concise
 	y_qtm = y_qtm[start_index:-1]
 	z_qtm = z_qtm[start_index:-1]
 
-	#x, y, z = translate(x,y,z) #ONLY FOR VISUAL COMPARISON BEFORE CALIBRATION
+	x_qtm, y_qtm, z_qtm = translate(x_qtm,y_qtm,z_qtm) #ONLY FOR VISUAL COMPARISON BEFORE CALIBRATION
+	x_or, y_or, z_or = translate(x_or,y_or,z_or) #ONLY FOR VISUAL COMPARISON BEFORE CALIBRATION
+
 	return np.array([x_qtm, y_qtm, z_qtm]).T, np.array([x_or, y_or, z_or]).T #returns list of 3vectors ad row vectors
 
 def plot_trajectories(): #TODO: plot_trajectories(qtm_traj, or_traj, zed_traj) makes more sense
