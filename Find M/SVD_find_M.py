@@ -72,6 +72,6 @@ qtm_data, or_data = get_qtm_rift_data()
 plot_transformed_trajectories(qtm_data, or_data)
 R, t = get_rotation_and_translation(qtm_data, or_data)
 filename = 'RotationFromCalibration.txt'
-np.savetxt(filename, R)
+np.savetxt(filename, R, fmt='%f')
 filename = 'TranslationFromCalibration.txt'
-np.savetxt(filename, t)
+np.savetxt(filename, t, fmt='%f')
