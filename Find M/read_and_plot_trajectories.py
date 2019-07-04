@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
+from scipy.spatial.transform import Rotation
 import pandas
 from mpl_toolkits import mplot3d
 from collections import defaultdict
@@ -14,118 +15,143 @@ def translate(x,y,z): #translates a list of (x,y,z) coordinates so that the firs
 
 	return x_translated,y_translated,z_translated
 	
-def get_qtm_data(): #depracated
-	file = path + 'QTMtracking_PositionRotationData.txt'
-	df = pandas.read_csv(file)
-	df_np = df.to_numpy()
+# def get_qtm_data(): #depracated
+# 	file = path + 'QTMtracking_PositionRotationData.txt'
+# 	df = pandas.read_csv(file)
+# 	df_np = df.to_numpy()
 
-	x = df_np[:,0]
-	y = df_np[:,1]
-	z = df_np[:,2]
-	qx = df_np[:,3]
-	qy = df_np[:,4]
-	qz = df_np[:,5]
-	qw = df_np[:,6]
+# 	x = df_np[:,0]
+# 	y = df_np[:,1]
+# 	z = df_np[:,2]
+# 	qx = df_np[:,3]
+# 	qy = df_np[:,4]
+# 	qz = df_np[:,5]
+# 	qw = df_np[:,6]
 
-	#x, y, z = translate(x,y,z) #ONLY FOR VISUAL COMPARISON BEFORE CALIBRATION
-	return np.array([x, y, z]).T #returns list of 3vectors ad row vectors
+# 	#x, y, z = translate(x,y,z) #ONLY FOR VISUAL COMPARISON BEFORE CALIBRATION
+# 	return np.array([x, y, z]).T #returns list of 3vectors ad row vectors
 
-def get_zed_data(): #depracated
+# def get_zed_data(): #depracated
 
-	file = path + 'zed_pose_data.txt'
+# 	file = path + 'zed_pose_data.txt'
 
-	df = pandas.read_csv(file)
-	df_np = df.to_numpy()
+# 	df = pandas.read_csv(file)
+# 	df_np = df.to_numpy()
 
-	x = df_np[:,0]
-	y = df_np[:,1]
-	z = df_np[:,2]
-	qx = df_np[:,3]
-	qy = df_np[:,4]
-	qz = df_np[:,5]
-	qw = df_np[:,6]
+# 	x = df_np[:,0]
+# 	y = df_np[:,1]
+# 	z = df_np[:,2]
+# 	qx = df_np[:,3]
+# 	qy = df_np[:,4]
+# 	qz = df_np[:,5]
+# 	qw = df_np[:,6]
 
-	x, y, z = translate(x,y,z) #ONLY FOR VISUAL COMPARISON BEFORE CALIBRATION
-	return np.array([x, y, z]).T #returns list of 3vectors ad row vectors
+# 	x, y, z = translate(x,y,z) #ONLY FOR VISUAL COMPARISON BEFORE CALIBRATION
+# 	return np.array([x, y, z]).T #returns list of 3vectors ad row vectors
 
-def get_rift_data(): #depracated 
+# def get_rift_data(): #depracated 
 
-	file = path + 'ORtracking_PositionAccelerationRotationData.txt'
+# 	file = path + 'ORtracking_PositionAccelerationRotationData.txt'
 
-	df = pandas.read_csv(file)
-	df_np = df.to_numpy()
+# 	df = pandas.read_csv(file)
+# 	df_np = df.to_numpy()
 
-	x = df_np[:,0]
-	y = df_np[:,1]
-	z = df_np[:,2]
-	qx = df_np[:,3]
-	qy = df_np[:,4]
-	qz = df_np[:,5]
-	qw = df_np[:,6]
+# 	x = df_np[:,0]
+# 	y = df_np[:,1]
+# 	z = df_np[:,2]
+# 	qx = df_np[:,3]
+# 	qy = df_np[:,4]
+# 	qz = df_np[:,5]
+# 	qw = df_np[:,6]
 
-	### Remove all the (0.0, 0.0, 0.0):s ###
-	index_array = [] #initiate
-	for index,_ in enumerate(x):
-		if (x[index]==0.0) * (y[index]==0.0) * (z[index]==0.0):
-			index_array.append(index)
+# 	### Remove all the (0.0, 0.0, 0.0):s ###
+# 	index_array = [] #initiate
+# 	for index,_ in enumerate(x):
+# 		if (x[index]==0.0) * (y[index]==0.0) * (z[index]==0.0):
+# 			index_array.append(index)
 
 
-	x = np.delete(x,index_array)
-	y = np.delete(y,index_array)
-	z = np.delete(z,index_array)
+# 	x = np.delete(x,index_array)
+# 	y = np.delete(y,index_array)
+# 	z = np.delete(z,index_array)
 
-	x, y, z = translate(x,y,z) #ONLY FOR VISUAL COMPARISON BEFORE CALIBRATION
-	return np.array([x, y, z]).T #returns list of 3vectors ad row vectors
+# 	x, y, z = translate(x,y,z) #ONLY FOR VISUAL COMPARISON BEFORE CALIBRATION
+# 	return np.array([x, y, z]).T #returns list of 3vectors ad row vectors
 
-def get_qtm_rift_data(): #TODO: make more concise
-	qtm_file = path + 'QTMtracking_PositionRotationData.txt'
-	or_file = path + 'ORtracking_PositionRotationData.txt'
 
-	df_qtm = pandas.read_csv(qtm_file)
-	df_np_qtm = df_qtm.to_numpy()
-	df_or = pandas.read_csv(or_file)
-	df_np_or = df_or.to_numpy()
+qtm_file = path + 'QTMtracking_PositionRotationData.txt'
+or_file = path + 'ORtracking_PositionRotationData.txt'
 
-	x_qtm = df_np_qtm[:,0]
-	y_qtm = df_np_qtm[:,1]
-	z_qtm = df_np_qtm[:,2]
-	qx_qtm = df_np_qtm[:,3]
-	qy_qtm = df_np_qtm[:,4]
-	qz_qtm = df_np_qtm[:,5]
-	qw_qtm = df_np_qtm[:,6]
-	x_or = df_np_or[:,0]
-	y_or = df_np_or[:,1]
-	z_or = df_np_or[:,2]
-	qx_or = df_np_or[:,3]
-	qy_or = df_np_or[:,4]
-	qz_or = df_np_or[:,5]
-	qw_or = df_np_or[:,6]
+df_qtm = pandas.read_csv(qtm_file)
+df_np_qtm = df_qtm.to_numpy()
+df_or = pandas.read_csv(or_file)
+df_np_or = df_or.to_numpy()
 
-	### Remove all the (0.0, 0.0, 0.0):s ###
-	index_array = [] #initiate
-	for index,_ in enumerate(x_or):
-		if (x_or[index]==0.0) * (y_or[index]==0.0) * (z_or[index]==0.0):
-			index_array.append(index)
+start_index = 1000 #TODO: make this less bodgy
+x_qtm = df_np_qtm[start_index:-1,0]
+y_qtm = df_np_qtm[start_index:-1,1]
+z_qtm = df_np_qtm[start_index:-1,2]
+qx_qtm = df_np_qtm[start_index:-1,3]
+qy_qtm = df_np_qtm[start_index:-1,4]
+qz_qtm = df_np_qtm[start_index:-1,5]
+qw_qtm = df_np_qtm[start_index:-1,6]
+x_or = df_np_or[start_index:-1,0]
+y_or = df_np_or[start_index:-1,1]
+z_or = df_np_or[start_index:-1,2]
+qx_or = df_np_or[start_index:-1,3]
+qy_or = df_np_or[start_index:-1,4]
+qz_or = df_np_or[start_index:-1,5]
+qw_or = df_np_or[start_index:-1,6]
 
-	x_or = np.delete(x_or,index_array)
-	y_or = np.delete(y_or,index_array)
-	z_or = np.delete(z_or,index_array)
-	x_qtm = np.delete(x_qtm,index_array)
-	y_qtm = np.delete(y_qtm,index_array)
-	z_qtm = np.delete(z_qtm,index_array)
+### Remove all the (0.0, 0.0, 0.0):s ###
+# index_array = [] #initiate
+# for index,_ in enumerate(x_or):
+# 	if (x_or[index]==0.0) * (y_or[index]==0.0) * (z_or[index]==0.0):
+# 		index_array.append(index)
 
-	start_index = 1000 #remove first N frames
-	x_or = x_or[start_index:-1]
-	y_or = y_or[start_index:-1]
-	z_or = z_or[start_index:-1]
-	x_qtm = x_qtm[start_index:-1]
-	y_qtm = y_qtm[start_index:-1]
-	z_qtm = z_qtm[start_index:-1]
+# print(len(x_or))
+# start_index = 1000
+# list_tmp  = [x_or, y_or, z_or, qx_or, qy_or, qz_or, qw_or, x_qtm, y_qtm, z_qtm, qx_qtm]
+# for i, _ in enumerate(list_tmp):
+# 	tmp = list_tmp[i]
+# 	tmp = np.delete(tmp,index_array)
+# 	list_tmp[i] = tmp[start_index:-1] #remove first N frames
+# print(len(list_tmp[0]))
+# print(len(x_or))
 
-	x_qtm, y_qtm, z_qtm = translate(x_qtm,y_qtm,z_qtm) #ONLY FOR VISUAL COMPARISON BEFORE CALIBRATION
-	x_or, y_or, z_or = translate(x_or,y_or,z_or) #ONLY FOR VISUAL COMPARISON BEFORE CALIBRATION
+# y_or = y_or[start_index:-1]
+# z_or = z_or[start_index:-1]
+# x_qtm = x_qtm[start_index:-1]
+# y_qtm = y_qtm[start_index:-1]
+# z_qtm = z_qtm[start_index:-1]
 
-	return np.array([x_qtm, y_qtm, z_qtm]).T, np.array([x_or, y_or, z_or]).T #returns list of 3vectors ad row vectors
+
+# x_or = np.delete(x_or,index_array)
+# y_or = np.delete(y_or,index_array)
+# z_or = np.delete(z_or,index_array)
+# qx_or = np.delete(qx_or, index_array)
+# qy_or = np.delete(qy_or, index_array)
+# qz_or = np.delete(qz_or, index_array)
+# qw_or = np.delete(qw_or, index_array)
+# x_qtm = np.delete(x_qtm,index_array)
+# y_qtm = np.delete(y_qtm,index_array)
+# z_qtm = np.delete(z_qtm,index_array)
+# qx_qtm = np.delete(qx_qtm,index_array)
+
+x_qtm, y_qtm, z_qtm = translate(x_qtm,y_qtm,z_qtm)
+x_or, y_or, z_or = translate(x_or,y_or,z_or)
+
+def get_qtm_pos_data():
+	return np.array([x_qtm, y_qtm, z_qtm]).T #returns list of 3vectors as row vectors
+
+def get_or_pos_data():
+	return np.array([x_or, y_or, z_or]).T #returns list of 3vectors as row vectors
+
+def get_qtm_orientation_data(): #TODO
+	return np.array([]) #returns rotation matrix
+
+def get_rift_orientation_data(): #TODO
+	return np.array([]) #returns rotation matrix
 
 def plot_trajectories(): #TODO: plot_trajectories(qtm_traj, or_traj, zed_traj) makes more sense
 
