@@ -103,6 +103,11 @@ qy_or = df_np_or[start_index:-1,4]
 qz_or = df_np_or[start_index:-1,5]
 qw_or = df_np_or[start_index:-1,6]
 
+R_or = np.zeros_like(qx_or) #initiate list of Rotation matrices
+for i,_ in enumerate(qx_or):
+	R_or[i] = np.array(Rotation.from_quat([qx_or[i], qy_or[i], qz_or[i], qw_or[i]]).as_dcm())
+
+
 ### Remove all the (0.0, 0.0, 0.0):s ###
 # index_array = [] #initiate
 # for index,_ in enumerate(x_or):
@@ -150,8 +155,8 @@ def get_or_pos_data():
 def get_qtm_orientation_data(): #TODO
 	return np.array([]) #returns rotation matrix
 
-def get_rift_orientation_data(): #TODO
-	return np.array([]) #returns rotation matrix
+def get_or_orientation_data(): #TODO
+	return R #returns rotation matrix
 
 def plot_trajectories(): #TODO: plot_trajectories(qtm_traj, or_traj, zed_traj) makes more sense
 
