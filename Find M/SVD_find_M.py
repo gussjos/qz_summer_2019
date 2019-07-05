@@ -4,44 +4,53 @@ from scipy.interpolate import interp1d
 import pandas
 from mpl_toolkits import mplot3d
 #from read_and_plot_trajectories import get_qtm_data, get_rift_data
-from read_and_plot_trajectories import get_qtm_pos_data, get_or_pos_data, get_or_orientation_data
+from read_and_plot_trajectories import get_qtm_pos_data, get_or_pos_data, get_or_orientation_data, get_qtm_orientation_data
 
-def get_rotation_and_translation(qdata, pdata): # finds R & t in eq  p=Rq+t where p/qdata are lists of row vectors
+def get_rotation_and_translation(qdata, pdata, rotdata): # finds R & t in eq  p=Rq+t where p/qdata are lists of row vectors
 	qdata = np.array(qdata)
 	pdata = np.array(pdata)
 
-	#define centroids
+	### define centroids ###
 	centroid_q = np.mean(qdata, axis=0)
 	centroid_p = np.mean(pdata, axis=0)
-
-	#transform centroids to origin
 	qdata = qdata - centroid_q
 	pdata = pdata - centroid_p
 
+	### calculate R ###
 	H = np.zeros((3,3)) #initiate
-	for i,_ in enumerate(qdata): #
+	for i,_ in enumerate(qdata):
 		q = qdata[i]
 		p = pdata[i]
 		H += np.outer(q, p) #outer product of q & p
 
-	U, S, Vt = np.linalg.svd(H)
+	U, Sigma, Vt = np.linalg.svd(H)
 	V = Vt.T
 	R = V.dot(U.T)
 
-	t = ()(centroid_p - R.dot(centroid_q)) #p=Rq+t
+	### calculate s ###
+	sum_RU = np.zeros((3,3)) #initiate
+	S0 = rotdata[0]
+	for _,S in enumerate(rotdata):
+		sum_RU += R.dot(S - S0)
 
-	return R,t
+	n = len(pdata)
+	s = np.linalg.solve(sum_RU, n*(centroid_p - R.dot(centroid_q))) #p=Rq+Ss
 
-def plot_transformed_trajectories(qdata, pdata): #p=Rq+t
-	R, t = get_rotation_and_translation(qdata, pdata)
+	return R, s
+
+def plot_transformed_trajectories(qdata, pdata, rotdata): #p=Rq+t
+	R, s = get_rotation_and_translation(qdata, pdata, rotdata)
 	
+	S0 = rotdata[0]
 	qdata_transformed = np.zeros_like(qdata) #initiate
 	for i,q in enumerate(qdata):
-		qdata_transformed[i] = R.dot(q) + t
+		S = rotdata[i]
+		U = (S - S0)
+		qdata_transformed[i] = R.dot(q + U.dot(s))
 
 	### Root Mean Square Error (assumes qdata & pdata matched) ### 
 	err = np.sum(np.sum((qdata_transformed - pdata)**2))
-	err_rms = np.sqrt(err/len(pdata));
+	err_rms = np.sqrt(err/len(pdata)) 
 	print('RMS error: ' + str(round(err_rms, 4)))
 
 	### 3d-plot ###
@@ -60,8 +69,10 @@ def plot_transformed_trajectories(qdata, pdata): #p=Rq+t
 	ax.set_zlim(mid_z - max_range, mid_z + max_range)
 	plt.title('QTM & OR trajectories')
 
-	ax.plot3D(qdata_transformed[:,0], qdata_transformed[:,1], qdata_transformed[:,2], color='r', label='QTM')
+	ax.plot3D(qdata_transformed[:,0], qdata_transformed[:,1], qdata_transformed[:,2], color='r', label='transformed QTM')
+	ax.plot3D(qdata[:,0], qdata[:,1], qdata[:,2], color='r', linestyle=':', label='QTM')
 	ax.plot3D(pdata[:,0], pdata[:,1], pdata[:,2], color='b', label='OR')
+	
 	plt.xlabel('x', fontsize=24)
 	plt.ylabel('y', fontsize=24)
 	plt.legend()
@@ -69,10 +80,12 @@ def plot_transformed_trajectories(qdata, pdata): #p=Rq+t
 
 qtm_data = get_qtm_pos_data()
 or_data = get_or_pos_data()
-rotation_data = get_or_orientation_data()
-plot_transformed_trajectories(qtm_data, or_data)
-R, t = get_rotation_and_translation(qtm_data, or_data)
+#rotation_data = get_or_orientation_data()
+rotation_data = get_qtm_orientation_data()
+plot_transformed_trajectories(qtm_data, or_data, rotation_data)
+R, s = get_rotation_and_translation(qtm_data, or_data, rotation_data)
+print('S = ' + str(s))
 filename = 'RotationFromCalibration.txt'
 np.savetxt(filename, R, fmt='%f')
 filename = 'TranslationFromCalibration.txt'
-np.savetxt(filename, t, fmt='%f')
+np.savetxt(filename, s, fmt='%f')
