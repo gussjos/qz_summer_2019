@@ -41,6 +41,7 @@ def get_rotation_and_translation(qdata, pdata, rotdata): # finds R & t in eq  p=
 def plot_transformed_trajectories(qdata, pdata, rotdata): #p=Rq+t
 	R, s = get_rotation_and_translation(qdata, pdata, rotdata)
 	
+	## transform qdata to fit pdata ###
 	S0 = rotdata[0]
 	qdata_transformed = np.zeros_like(qdata) #initiate
 	for i,q in enumerate(qdata):
@@ -60,10 +61,10 @@ def plot_transformed_trajectories(qdata, pdata, rotdata): #p=Rq+t
 	x = qdata_transformed[:,0]
 	y = qdata_transformed[:,1]
 	z = qdata_transformed[:,2]
-	max_range = np.array([x.max()-x.min(), y.max()-y.min(), z.max()-z.min()]).max() / 2.0
-	mid_x = (x.max()+x.min()) * 0.5
-	mid_y = (y.max()+y.min()) * 0.5
-	mid_z = (z.max()+z.min()) * 0.5
+	max_range = np.array([x.max() - x.min(), y.max() - y.min(), z.max() - z.min()]).max() / 2.0
+	mid_x = (x.max() + x.min()) * 0.5
+	mid_y = (y.max() + y.min()) * 0.5
+	mid_z = (z.max() + z.min()) * 0.5
 	ax.set_xlim(mid_x - max_range, mid_x + max_range)
 	ax.set_ylim(mid_y - max_range, mid_y + max_range)
 	ax.set_zlim(mid_z - max_range, mid_z + max_range)
@@ -84,7 +85,7 @@ or_data = get_or_pos_data()
 rotation_data = get_qtm_orientation_data()
 plot_transformed_trajectories(qtm_data, or_data, rotation_data)
 R, s = get_rotation_and_translation(qtm_data, or_data, rotation_data)
-print('S = ' + str(s))
+print('s = ' + str(s))
 filename = 'RotationFromCalibration.txt'
 np.savetxt(filename, R, fmt='%f')
 filename = 'TranslationFromCalibration.txt'

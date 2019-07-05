@@ -41,15 +41,11 @@ qw_or = df_np_or[start_index:-1,6]
 
 R0_or = np.array(Rotation.from_quat([qx_or[0], qy_or[0], qz_or[0], qw_or[0]]).as_dcm())
 R0_or_inv = R0_or.T #R is orthogonal so transpose is inverse
-R_or = [[] for i,_ in enumerate(qx_or)] #initiate list of Rotation matrices
-for i,_ in enumerate(qx_or):
-	R_or[i] = np.array(Rotation.from_quat([qx_or[i], qy_or[i], qz_or[i], qw_or[i]]).as_dcm()).dot(R0_or_inv)
+R_or = [np.array(Rotation.from_quat([qx_or[i], qy_or[i], qz_or[i], qw_or[i]]).as_dcm()).dot(R0_or_inv) for i,_ in enumerate(qx_or)] #initiate list of Rotation matrices
 
 R0_qtm = np.array(Rotation.from_quat([qx_qtm[0], qy_qtm[0], qz_qtm[0], qw_qtm[0]]).as_dcm())
 R0_qtm_inv = R0_qtm.T #R is orthogonal so transpose is inverse
-R_qtm = [[] for i,_ in enumerate(qx_qtm)] #initiate list of Rotation matrices
-for i,_ in enumerate(qx_qtm):
-	R_qtm[i] = np.array(Rotation.from_quat([qx_qtm[i], qy_qtm[i], qz_qtm[i], qw_qtm[i]]).as_dcm()).dot(R0_qtm_inv)
+R_qtm = [np.array(Rotation.from_quat([qx_qtm[i], qy_qtm[i], qz_qtm[i], qw_qtm[i]]).as_dcm()).dot(R0_qtm_inv) for i,_ in enumerate(qx_qtm)] #initiate list of Rotation matrices
 
 x_qtm, y_qtm, z_qtm = translate(x_qtm,y_qtm,z_qtm)
 x_or, y_or, z_or = translate(x_or,y_or,z_or)
@@ -79,7 +75,7 @@ def plot_trajectories(): #TODO: plot_trajectories(qtm_traj, or_traj, zed_traj) m
 	x = qtm_traj[0]
 	y = qtm_traj[1]
 	z = qtm_traj[2]
-	max_range = np.array([x.max()-x.min(), y.max()-y.min(), z.max()-z.min()]).max() / 2.0
+	max_range = np.array([x.max() - x.min(), y.max() - y.min(), z.max() - z.min()]).max() / 2.0
 	mid_x = (x.max()+x.min()) * 0.5
 	mid_y = (y.max()+y.min()) * 0.5
 	mid_z = (z.max()+z.min()) * 0.5
@@ -95,7 +91,4 @@ def plot_trajectories(): #TODO: plot_trajectories(qtm_traj, or_traj, zed_traj) m
 	plt.ylabel('y', fontsize=24)
 	plt.legend()
 	plt.show()
-
-
-
 
