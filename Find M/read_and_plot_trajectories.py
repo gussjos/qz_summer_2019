@@ -43,9 +43,26 @@ R0_or = np.array(Rotation.from_quat([qx_or[0], qy_or[0], qz_or[0], qw_or[0]]).as
 R0_or_inv = R0_or.T #R is orthogonal so transpose is inverse
 R_or = [np.array(Rotation.from_quat([qx_or[i], qy_or[i], qz_or[i], qw_or[i]]).as_dcm()).dot(R0_or_inv) for i,_ in enumerate(qx_or)] #initiate list of Rotation matrices
 
+quat_path = sys.path[0] + '/quaternions/'
+
+# np.savetxt(filename, R_or, fmt='%f', delimiter=",")
+
 R0_qtm = np.array(Rotation.from_quat([qx_qtm[0], qy_qtm[0], qz_qtm[0], qw_qtm[0]]).as_dcm())
 R0_qtm_inv = R0_qtm.T #R is orthogonal so transpose is inverse
 R_qtm = [np.array(Rotation.from_quat([qx_qtm[i], qy_qtm[i], qz_qtm[i], qw_qtm[i]]).as_dcm()).dot(R0_qtm_inv) for i,_ in enumerate(qx_qtm)] #initiate list of Rotation matrices
+
+#print((R_or)[0][0:3])
+print((R_or)[0][0:3])
+
+#print((R_qtm)[0][0:3])
+print((R_qtm)[0][0:3])
+
+
+print(np.linalg.norm(R_or[0][0:3]))
+
+
+
+
 
 x_qtm, y_qtm, z_qtm = translate(x_qtm,y_qtm,z_qtm)
 x_or, y_or, z_or = translate(x_or,y_or,z_or)
