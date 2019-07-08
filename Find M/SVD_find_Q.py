@@ -3,8 +3,8 @@ import matplotlib.pyplot as plt
 from scipy.interpolate import interp1d
 import pandas
 from mpl_toolkits import mplot3d
-#from read_and_plot_trajectories import get_qtm_data, get_rift_data
-from read_and_plot_trajectories import get_qtm_rift_data
+from read_and_plot_trajectories import get_qtm_pos_data, get_or_pos_data
+#from read_and_plot_trajectories import get_qtm_rift_data
 
 def get_rotation_and_translation(qdata, pdata): # finds R & t in eq  p=Rq+t where p/qdata are lists of row vectors
 	qdata = np.array(qdata)
@@ -67,7 +67,8 @@ def plot_transformed_trajectories(qdata, pdata): #p=Rq+t
 	plt.legend()
 	plt.show()
 
-qtm_data, or_data = get_qtm_rift_data()
+qtm_data = get_qtm_pos_data()
+or_data = get_or_pos_data()
 plot_transformed_trajectories(qtm_data, or_data)
 R, t = get_rotation_and_translation(qtm_data, or_data)
 filename = 'RotationFromCalibration.txt'

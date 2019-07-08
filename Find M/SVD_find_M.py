@@ -7,12 +7,19 @@ from mpl_toolkits import mplot3d
 from read_and_plot_trajectories import get_qtm_pos_data, get_or_pos_data, get_or_orientation_data, get_qtm_orientation_data
 
 def get_rotation_and_translation(qdata, pdata, rotdata): # finds R & t in eq  p=Rq+t where p/qdata are lists of row vectors
-	qdata = np.array(qdata)
-	pdata = np.array(pdata)
+	R = np.array([[-0.599147, 0.042707, -0.799499], [-0.042771, 0.995443, 0.085227], [0.799496, 0.085259, -0.594590]]) #from SVD_find_Q
 
 	### define centroids ###
-	centroid_q = np.mean(qdata, axis=0)
-	centroid_p = np.mean(pdata, axis=0)
+	S0 = rotdata[0]
+	U = [S - S0 for S in rotdata]
+	UR = [u.dot(R) for u in U]
+	Uq = [U[i].T.dot(q) for i,q in enumerate(qdata)]
+	URp = [U[i].T.dot(R).dot(p) for i,p in enumerate(pdata)]
+
+	centroid_q = np.linalg.solve(sum(U), sum(Uq))
+	#centroid_q = np.mean(qdata, axis=0)
+	centroid_p = np.linalg.solve(sum(UR), sum(URp))
+	#centroid_p = np.mean(pdata, axis=0)
 	qdata = qdata - centroid_q
 	pdata = pdata - centroid_p
 
@@ -23,24 +30,29 @@ def get_rotation_and_translation(qdata, pdata, rotdata): # finds R & t in eq  p=
 		p = pdata[i]
 		H += np.outer(q, p) #outer product of q & p
 
-	U, Sigma, Vt = np.linalg.svd(H)
-	V = Vt.T
-	R = V.dot(U.T)
+	u, sigma, vt = np.linalg.svd(H)
+	v = vt.T
+	R = v.dot(u.T)
 
 	### calculate s ###
-	sum_RU = np.zeros((3,3)) #initiate
-	S0 = rotdata[0]
-	for _,S in enumerate(rotdata):
-		sum_RU += R.dot(S - S0)
+	sum_URU = np.zeros((3,3)) #initiate
+	tmp = np.zeros((3)) #initiate
+	for i,S in enumerate(rotdata):
+		U = (S - S0)
+		sum_URU += U.T.dot(R).dot(U)
+		tmp += U.T.dot(pdata[i] - R.dot(qdata[i]))
 
-	n = len(pdata)
-	s = np.linalg.solve(sum_RU, n*(centroid_p - R.dot(centroid_q))) #p=Rq+Ss
+	# n = len(pdata)
+	# s = np.linalg.solve(sum_URU, n*U.dot(centroid_p - R.dot(centroid_q))) #p=Rq+Us
+
+	s = np.linalg.solve(sum_URU, tmp) #p=Rq+Us
 
 	return R, s
 
 def plot_transformed_trajectories(qdata, pdata, rotdata): #p=Rq+t
 	R, s = get_rotation_and_translation(qdata, pdata, rotdata)
 	
+	s =  np.array([ 0.00717889,  0.0079406 , -0.0131751]) #BODGE
 	## transform qdata to fit pdata ###
 	S0 = rotdata[0]
 	qdata_transformed = np.zeros_like(qdata) #initiate
@@ -81,8 +93,8 @@ def plot_transformed_trajectories(qdata, pdata, rotdata): #p=Rq+t
 
 qtm_data = get_qtm_pos_data()
 or_data = get_or_pos_data()
-#rotation_data = get_or_orientation_data()
-rotation_data = get_qtm_orientation_data()
+rotation_data = get_or_orientation_data()
+#rotation_data = get_qtm_orientation_data()
 plot_transformed_trajectories(qtm_data, or_data, rotation_data)
 R, s = get_rotation_and_translation(qtm_data, or_data, rotation_data)
 print('s = ' + str(s))
