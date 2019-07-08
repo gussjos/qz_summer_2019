@@ -52,13 +52,28 @@ R0_qtm_inv = R0_qtm.T #R is orthogonal so transpose is inverse
 R_qtm = [np.array(Rotation.from_quat([qx_qtm[i], qy_qtm[i], qz_qtm[i], qw_qtm[i]]).as_dcm()).dot(R0_qtm_inv) for i,_ in enumerate(qx_qtm)] #initiate list of Rotation matrices
 
 #print((R_or)[0][0:3])
-print((R_or)[0][0:3])
+#print((R_or)[0][0:3])
 
 #print((R_qtm)[0][0:3])
-print((R_qtm)[0][0:3])
+#print((R_qtm)[0][0:3])
 
+norm_sum = 0
+for i in range(1000,1200):
 
-print(np.linalg.norm(R_or[0][0:3]))
+	#print(R_or[i][0:3])
+
+	r_or = Rotation.from_dcm(R_or[i][0:3])
+	r_qtm = Rotation.from_dcm(R_qtm[i][0:3])
+	r_qtm_to_or = r_qtm.inv()*r_or
+
+	qtm_quat = r_qtm.as_quat()
+	or_quat = r_or.as_quat()
+	quat_from_qtm_to_rift = r_qtm_to_or.as_quat()
+
+	#print(qtm_quat)
+	#print(or_quat)
+	print('quat_from_qtm_to_rift = ' + str(quat_from_qtm_to_rift))
+
 
 
 
