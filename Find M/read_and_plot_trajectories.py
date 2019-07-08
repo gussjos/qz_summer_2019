@@ -58,7 +58,7 @@ R_qtm = [np.array(Rotation.from_quat([qx_qtm[i], qy_qtm[i], qz_qtm[i], qw_qtm[i]
 #print((R_qtm)[0][0:3])
 
 norm_sum = 0
-for i in range(1000,1200):
+for i in range(500,1200):
 
 	#print(R_or[i][0:3])
 
