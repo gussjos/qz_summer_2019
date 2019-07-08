@@ -1,6 +1,7 @@
 import numpy as np
 from matplotlib import pyplot as plt
 from scipy.optimize import minimize
+from scipy.spatial.transform import Rotation
 from read_and_plot_trajectories import get_qtm_pos_data, get_or_pos_data, get_or_orientation_data, get_qtm_orientation_data
 
 r_qtm = get_qtm_pos_data()
@@ -11,28 +12,42 @@ U = [S - rotdata[0] for S in rotdata]
 def QTM2OR(R, q, U, s):
 	return R.dot(q - U.dot(s))
  
-def R_from_q(q): #returns rotation 3x3-matrix given a quaternion of the form a + bi + cj + dk
+def R_from_quaternion(q): #returns rotation 3x3-matrix given a quaternion of the form a + bi + cj + dk
 	#q = [a, b, c, d]
+	q = q/np.linalg.norm(q) #BODGE
 	return np.array([[q[0]**2 + q[1]**2 - q[2]**2 - q[3]**2, 2*q[1]*q[2] - 2*q[0]*q[3]            , 2*q[1]*q[3] + 2*q[0]*q[2]], \
 				 	 [2*q[1]*q[2] + 2*q[0]*q[3]            , q[0]**2 - q[1]**2 + q[2]**2 - q[3]**2, 2*q[2]*q[3] - 2*q[0]*q[1]], \
 				 	 [2*q[1]*q[3] - 2*q[0]*q[2]            , 2*q[2]*q[3] + 2*q[0]*q[1]            , q[0]**2 - q[1]**2 - q[2]**2 + q[3]**2]])
 
+
+def R_from_euler(theta):#TODO
+	return Rotation.from_euler(theta).as_dcm()
+
+
 def obj_fun(params): #params = [sx sy sz a b c d]
-	s = np.array(params[0:2])
-	R = R_from_q(params[3:-1])
+	s = np.array(params[0:3])
+	# R = R_from_quaternion(params[3:7])
+	R = np.array([[-0.599147, 0.042707, -0.799499], [-0.042771, 0.995443, 0.085227], [0.799496, 0.085259, -0.594590]])
+
+	# R = R_from_euler('zyx', params[3:6])
 
 	sum = 0
 	for i,_ in enumerate(r_qtm):
 		sum += np.linalg.norm(r_or[i] - QTM2OR(R, r_qtm[i], U[i], s))**2
-	return sum
+	return sum/len(r_qtm) #returns RMS-error
 
-R_guess = np.array([[-0.599147, 0.042707, -0.799499], [-0.042771, 0.995443, 0.085227], [0.799496, 0.085259, -0.594590]])
 s_guess = np.array([-0.05626681,  0.07828984, -0.05447945])
-guess = np.append(s_guess, R_guess)
-res = minimize(obj_fun, s_guess, method='COBYLA', tol=1e-6)
+R_guess = np.array([[-0.599147, 0.042707, -0.799499], [-0.042771, 0.995443, 0.085227], [0.799496, 0.085259, -0.594590]])
+quaternion_guess = Rotation.from_dcm(R_guess).as_quat()
+euler_guess = Rotation.from_dcm(R_guess).as_euler('zyx')
+guess = np.append(s_guess, quaternion_guess)
+# guess = np.append(s_guess, euler_guess)
+res = minimize(obj_fun, guess, method='nelder-mead', tol=1e-6)
 
 print(res)
-s = res['x']
+s = res['x'][0:3]
+quaternion = res['x'][3:7]
+R = Rotation.from_quat(quaternion).as_dcm()
 
 def plot_trajectories(qdata, pdata):
 	### 3d-plot ###
@@ -60,6 +75,6 @@ def plot_trajectories(qdata, pdata):
 	plt.legend()
 	plt.show()
 
-r_qtm_transformed = np.array([QTM2OR(q, U[i], s) for i,q in enumerate(r_qtm)])
+r_qtm_transformed = np.array([QTM2OR(R, q, U[i], s) for i,q in enumerate(r_qtm)])
 plot_trajectories(r_or, r_qtm_transformed)
 
