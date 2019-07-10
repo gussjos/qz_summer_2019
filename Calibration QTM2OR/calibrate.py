@@ -2,7 +2,7 @@ import numpy as np
 from matplotlib import pyplot as plt
 from scipy.optimize import minimize
 from scipy.spatial.transform import Rotation
-from read_and_plot_trajectories import *
+from read_unity_data import *
 
 r_qtm = get_qtm_pos_data()
 r_or = get_or_pos_data()
