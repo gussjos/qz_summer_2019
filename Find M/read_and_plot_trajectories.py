@@ -39,6 +39,7 @@ qy_or = df_np_or[start_index:-1,4]
 qz_or = df_np_or[start_index:-1,5]
 qw_or = df_np_or[start_index:-1,6]
 
+
 R0_or = np.array(Rotation.from_quat([qx_or[0], qy_or[0], qz_or[0], qw_or[0]]).as_dcm())
 R0_or_inv = R0_or.T #R is orthogonal so transpose is inverse
 R_or = [np.array(Rotation.from_quat([qx_or[i], qy_or[i], qz_or[i], qw_or[i]]).as_dcm()).dot(R0_or_inv) for i,_ in enumerate(qx_or)] #initiate list of Rotation matrices
@@ -47,6 +48,7 @@ R0_qtm = np.array(Rotation.from_quat([qx_qtm[0], qy_qtm[0], qz_qtm[0], qw_qtm[0]
 R0_qtm_inv = R0_qtm.T #R is orthogonal so transpose is inverse
 R_qtm = [np.array(Rotation.from_quat([qx_qtm[i], qy_qtm[i], qz_qtm[i], qw_qtm[i]]).as_dcm()).dot(R0_qtm_inv) for i,_ in enumerate(qx_qtm)] #initiate list of Rotation matrices
 
+t = np.array([x_qtm[0], y_qtm[0], z_qtm[0]]) - np.array([x_or[0], y_or[0], z_or[0]])
 x_qtm, y_qtm, z_qtm = translate(x_qtm,y_qtm,z_qtm)
 x_or, y_or, z_or = translate(x_or,y_or,z_or)
 
@@ -56,11 +58,20 @@ def get_qtm_pos_data():
 def get_or_pos_data():
 	return np.array([x_or, y_or, z_or]).T #returns list of 3vectors as row vectors
 
-def get_qtm_orientation_data(): #TODO
-	return R_qtm #returns rotation matrix
+def get_qtm_quaternion_data(): #q = a + bi + cj + dk
+	return np.array([qw_qtm, qx_qtm, qy_qtm, qz_qtm]).T #returns list of quaternions as row vectors
 
-def get_or_orientation_data(): #TODO
-	return R_or #returns rotation matrix
+def get_or_quaternion_data(): #q = a + bi + cj + dk
+	return np.array([qw_or, qx_or, qy_or, qz_or]).T #returns list of quaternions as row vectors
+
+def get_qtm_orientation_data():
+	return R_qtm #returns list of rotation matrices
+
+def get_or_orientation_data():
+	return R_or #returns list of rotation matrices
+
+def get_t():
+	return t
 
 def plot_trajectories(): #TODO: plot_trajectories(qtm_traj, or_traj, zed_traj) makes more sense
 

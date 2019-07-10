@@ -2,7 +2,7 @@ import numpy as np
 from matplotlib import pyplot as plt
 from scipy.optimize import minimize
 from scipy.spatial.transform import Rotation
-from read_and_plot_trajectories import get_qtm_pos_data, get_or_pos_data, get_or_orientation_data, get_qtm_orientation_data
+from read_and_plot_trajectories import *
 
 r_qtm = get_qtm_pos_data()
 r_or = get_or_pos_data()
@@ -34,7 +34,6 @@ s_guess = np.array([-0.06794844, 0.09854875, -0.05767883])
 quaternion_guess  = np.array([-0.455571, 0.0114271, 0.889999, 0.0150321])
 guess = np.append(s_guess, quaternion_guess)
 res = minimize(obj_fun, guess, method='COBYLA', tol=1e-6)
-print(res)
 s = res['x'][0:3]
 quaternion = res['x'][3:7]
 R = R_from_quaternion(quaternion)
@@ -65,9 +64,11 @@ def plot_trajectories(qdata, pdata):
 	plt.legend()
 	plt.show()
 
+print(res['message'])
 print('RMS error = ' + str(round(res['fun']*1000, 2)) + ' [mm]')
-print('s = ' + str(s) + ' [m]')
+print('s = ' + str(s*1000) + ' [mm]')
 print('q = ' + str(quaternion)) 
+print('t = ' + str(get_t()) + ' [m]')
 
 r_qtm_transformed = np.array([QTM2OR(R, q, U[i], s) for i,q in enumerate(r_qtm)])
 plot_trajectories(r_qtm_transformed, r_or)
