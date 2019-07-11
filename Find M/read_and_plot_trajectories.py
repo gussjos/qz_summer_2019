@@ -6,7 +6,7 @@ from mpl_toolkits import mplot3d
 from collections import defaultdict
 import sys
 #path = sys.path[0] + '/../sample_QTM-OR-ZED_data/'	#if running sample data
-path = sys.path[0] + '/data_files/'							#if running like normal
+path = sys.path[0] + '/data_files/sample_data/'							#if running like normal
 
 def translate(x,y,z): #translates a list of (x,y,z) coordinates so that the first one is the origin
 	x_translated = np.array([u - x[0] for u in x])
