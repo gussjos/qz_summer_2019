@@ -5,7 +5,7 @@ import pandas
 from mpl_toolkits import mplot3d
 from collections import defaultdict
 import sys
-path = sys.path[0] + '/data_files/sample_data/'	#if running sample data
+path = sys.path[0] + '/data_files/sample_data/'		#if running sample data
 #path = sys.path[0] + '/data_files/'				#if running like normal
 
 def translate(x,y,z): #translates a list of (x,y,z) coordinates so that the first one is the origin
@@ -18,6 +18,7 @@ def translate(x,y,z): #translates a list of (x,y,z) coordinates so that the firs
 qtm_file = path + 'QTMtracking_PositionRotationData.txt'
 or_file = path + 'ORtracking_PositionRotationData.txt'
 
+### import data as numpy arrays ###
 df_qtm = pandas.read_csv(qtm_file)
 df_np_qtm = df_qtm.to_numpy()
 df_or = pandas.read_csv(or_file)
@@ -39,7 +40,7 @@ qy_or = df_np_or[start_index:-1,4]
 qz_or = df_np_or[start_index:-1,5]
 qw_or = df_np_or[start_index:-1,6]
 
-
+### assume data starts at origin, oriented along coordinate axii ###
 R0_or = np.array(Rotation.from_quat([qx_or[0], qy_or[0], qz_or[0], qw_or[0]]).as_dcm())
 R0_or_inv = R0_or.T #R is orthogonal so transpose is inverse
 R_or = [np.array(Rotation.from_quat([qx_or[i], qy_or[i], qz_or[i], qw_or[i]]).as_dcm()).dot(R0_or_inv) for i,_ in enumerate(qx_or)] #initiate list of Rotation matrices
@@ -53,7 +54,8 @@ x_qtm, y_qtm, z_qtm = translate(x_qtm,y_qtm,z_qtm)
 x_or, y_or, z_or = translate(x_or,y_or,z_or)
 
 def get_qtm_pos_data():
-	return np.array([x_qtm, y_qtm, z_qtm]).T #returns list of 3vectors as row vectors
+	"""returns list of 3vectors as row vectors"""
+	return np.array([x_qtm, y_qtm, z_qtm]).T
 
 def get_or_pos_data():
 	return np.array([x_or, y_or, z_or]).T #returns list of 3vectors as row vectors
@@ -72,34 +74,3 @@ def get_or_orientation_data():
 
 def get_t():
 	return t
-
-# def plot_trajectories(): #TODO: plot_trajectories(qtm_traj, or_traj, zed_traj) makes more sense
-
-# 	qtm_traj = get_qtm_data().T
-# 	or_traj = get_rift_data().T
-# 	zed_traj = get_zed_data().T
-
-# 	### 3d-plot ###
-# 	fig = plt.figure()
-# 	ax = plt.axes(projection='3d')
-
-# 	x = qtm_traj[0]
-# 	y = qtm_traj[1]
-# 	z = qtm_traj[2]
-# 	max_range = np.array([x.max() - x.min(), y.max() - y.min(), z.max() - z.min()]).max() / 2.0
-# 	mid_x = (x.max()+x.min()) * 0.5
-# 	mid_y = (y.max()+y.min()) * 0.5
-# 	mid_z = (z.max()+z.min()) * 0.5
-# 	ax.set_xlim(mid_x - max_range, mid_x + max_range)
-# 	ax.set_ylim(mid_y - max_range, mid_y + max_range)
-# 	ax.set_zlim(mid_z - max_range, mid_z + max_range)
-# 	plt.title('QTM, OR, & ZED trajectories')
-
-# 	ax.plot3D(qtm_traj[0],qtm_traj[1],qtm_traj[2], color='r', label='QTM')
-# 	ax.plot3D(or_traj[0], or_traj[1], or_traj[2], color='b', label='OR')
-# 	#ax.plot3D(zed_traj[0], zed_traj[1], zed_traj[2], color='g', label='ZED')
-# 	plt.xlabel('x', fontsize=24)
-# 	plt.ylabel('y', fontsize=24)
-# 	plt.legend()
-# 	plt.show()
-
