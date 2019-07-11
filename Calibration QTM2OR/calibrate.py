@@ -75,9 +75,9 @@ plot_trajectories(r_qtm_transformed, r_or)
 
 input_var = input("save calibration? y/n: ")
 if (input_var=='y'):
-	np.savetxt('s_from_calibration.txt', s)
-	np.savetxt('q_from_calibration.txt', quaternion)
-	np.savetxt('t_from_calibration.txt', t)
+	np.savetxt('data_files/s_from_calibration.txt', s)
+	np.savetxt('data_files/q_from_calibration.txt', quaternion)
+	np.savetxt('data_files/t_from_calibration.txt', t)
 	print('Calibration data saved.')
 
 
