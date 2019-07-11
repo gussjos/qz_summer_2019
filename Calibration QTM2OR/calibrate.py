@@ -2,7 +2,7 @@ import numpy as np
 from matplotlib import pyplot as plt
 from scipy.optimize import minimize
 from scipy.spatial.transform import Rotation
-from read_and_plot_trajectories import *
+from read_unity_data import *
 
 r_qtm = get_qtm_pos_data()
 r_or = get_or_pos_data()
@@ -55,9 +55,9 @@ def plot_trajectories(qdata, pdata):
 	ax.set_zlim(mid_z - max_range, mid_z + max_range)
 	plt.title('QTM & OR trajectories')
 
-	ax.plot3D(r_qtm[:,0], r_qtm[:,1], r_qtm[:,2], color='r', linestyle=':', label='QTM')
-	ax.plot3D(qdata[:,0], qdata[:,1], qdata[:,2], color='r', label='QTM transformed')
-	ax.plot3D(pdata[:,0], pdata[:,1], pdata[:,2], color='b', label='OR')
+	ax.plot3D(r_qtm[:,0], r_qtm[:,1], r_qtm[:,2], color='r', linestyle=':', label='QTM trajectory')
+	ax.plot3D(qdata[:,0], qdata[:,1], qdata[:,2], color='r', label='transformed QTM trajectory')
+	ax.plot3D(pdata[:,0], pdata[:,1], pdata[:,2], color='b', label='OR trajectory')
 	
 	plt.xlabel('x', fontsize=24)
 	plt.ylabel('y', fontsize=24)
@@ -72,3 +72,13 @@ print('t = ' + str(get_t()) + ' [m]')
 
 r_qtm_transformed = np.array([QTM2OR(R, q, U[i], s) for i,q in enumerate(r_qtm)])
 plot_trajectories(r_qtm_transformed, r_or)
+
+input_var = input("save calibration? y/n: ")
+
+if (input_var=='y'):
+	np.savetxt('s_from_calibration.txt', s)
+	np.savetxt('q_from_calibration.txt', quaternion)
+	np.savetxt('t_from_calibration.txt', t)
+	print('Calibration data saved.')
+
+
