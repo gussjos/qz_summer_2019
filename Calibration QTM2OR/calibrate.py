@@ -14,8 +14,8 @@ def QTM2OR(R, q, U, s):
 	D = np.array([[1, 0, 0], [0, 1, 0], [0, 0, d]]) #reflection matrix
 	return R.dot(D).dot(q + U.dot(s)) # changed from - to +
  
-def R_from_quaternion(q): #returns rotation 3x3-matrix given a quaternion of the form a + bi + cj + dk
-	#q = [a, b, c, d]
+def R_from_quaternion(q):
+	"""returns rotation 3x3-matrix given a quaternion of the form [a, b, c, d] ~ a + bi + cj + dk"""
 	q = q/np.linalg.norm(q) #only normed quaternions are physically meaningful
 	return np.array([[q[0]**2 + q[1]**2 - q[2]**2 - q[3]**2, 2*q[1]*q[2] - 2*q[0]*q[3]            , 2*q[1]*q[3] + 2*q[0]*q[2]], \
 				 	 [2*q[1]*q[2] + 2*q[0]*q[3]            , q[0]**2 - q[1]**2 + q[2]**2 - q[3]**2, 2*q[2]*q[3] - 2*q[0]*q[1]], \
