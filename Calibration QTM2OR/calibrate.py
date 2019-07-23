@@ -12,7 +12,7 @@ U = [S - rotdata[0] for S in rotdata]
 def QTM2OR(R, q, U, s):
 	d = 1 #1 for just rotation, -1 for rotation & reflection
 	D = np.array([[1, 0, 0], [0, 1, 0], [0, 0, d]]) #reflection matrix
-	return R.dot(D).dot(q - U.dot(s))
+	return R.dot(D).dot(q + U.dot(s)) # changed from - to +
  
 def R_from_quaternion(q): #returns rotation 3x3-matrix given a quaternion of the form a + bi + cj + dk
 	#q = [a, b, c, d]
@@ -30,8 +30,8 @@ def obj_fun(params): #params = [sx sy sz a b c d]
 		sum += np.linalg.norm(r_or[i] - QTM2OR(R, r_qtm[i], U[i], s))**2
 	return sum/len(r_qtm) #returns RMS-error
 
-s_guess = np.array([-0.06794844, 0.09854875, -0.05767883])
-quaternion_guess  = np.array([-0.455571, 0.0114271, 0.889999, 0.0150321])
+s_guess = np.array([0,0,0])*1e-3 # [m]
+quaternion_guess  = np.array([4.28,-0.02646,-4.13,-0.23]) # [a b c d] ~ a + bi + cj + dk
 guess = np.append(s_guess, quaternion_guess)
 res = minimize(obj_fun, guess, method='COBYLA', tol=1e-6)
 s = res['x'][0:3]
