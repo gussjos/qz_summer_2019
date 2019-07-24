@@ -3,6 +3,8 @@ from matplotlib import pyplot as plt
 from scipy.optimize import minimize
 from scipy.spatial.transform import Rotation
 from read_unity_data import *
+import xml.etree.ElementTree as ET
+filepath_xml = "C:/Users/sjn/Documents/QZ summer/testing_xml_parsing.xml" #this ought to be the file path to an xml file containing the "oculus_rift" 6DOF body
 
 r_qtm = get_qtm_pos_data()
 r_or = get_or_pos_data()
@@ -79,6 +81,20 @@ if (input_var=='y'):
 	np.savetxt('data_files/q_from_calibration.txt', quaternion)
 	np.savetxt('data_files/R_from_calibration.txt', R)
 	np.savetxt('data_files/t_from_calibration.txt', t)
+
+	### edit QTM 6DOF body ###
+	tree = ET.parse(filepath_xml)
+	root = tree.getroot()
+	for body in root:
+		name = body.find('Name')
+		if name.text == 'oculus_rift':
+			points = body.find('Points')
+			for point in points:
+				point.attrib['X'] = str(float(point.attrib['X']) + s[0]*1000) # [mm]
+				point.attrib['Y'] = str(float(point.attrib['Y']) + s[1]*1000) # [mm]
+				point.attrib['Z'] = str(float(point.attrib['Z']) + s[2]*1000) # [mm]
+	tree.write(filepath_xml)
+
 	print('Calibration data saved.')
 
 
