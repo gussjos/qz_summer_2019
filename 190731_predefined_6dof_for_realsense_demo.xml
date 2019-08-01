@@ -1,0 +1,48 @@
+<QTM_Body_File_Ver_1.00>
+    <Body>
+        <Name>oculus_rift</Name>
+        <Color R="255" G="0" B="0"/>
+        <MaximumResidual>10.000000</MaximumResidual>
+        <MinimumMarkersInBody>3</MinimumMarkersInBody>
+        <BoneLengthTolerance>5.000000</BoneLengthTolerance>
+        <Points>
+            <Point X="-108.326322" Y="38.666072" Z="60.812301" Virtual="0" Name="oculus_rift - 1"/>
+            <Point X="-64.525584" Y="72.583803" Z="57.244095" Virtual="0" Name="oculus_rift - 2"/>
+            <Point X="-107.386560" Y="-15.111386" Z="74.520542" Virtual="0" Name="oculus_rift - 3"/>
+            <Point X="-24.358913" Y="35.440369" Z="60.812301" Virtual="0" Name="oculus_rift - 4"/>
+            <Point X="-67.502052" Y="1.694459" Z="57.244095" Virtual="0" Name="oculus_rift - 5"/>
+        </Points>
+        <Data_origin X="0.000000" Y="0.000000" Z="0.000000" Relative_body="1">0</Data_origin>
+        <Data_orientation R11="1.000000" R12="0.000000" R13="0.000000" R21="0.000000" R22="1.000000" R23="0.000000" R31="0.000000" R32="0.000000" R33="1.000000" Relative_body="1">0</Data_orientation>
+    </Body>
+    <Body>
+        <Name>L-frame</Name>
+        <Color R="0" G="255" B="0"/>
+        <MaximumResidual>10.000000</MaximumResidual>
+        <MinimumMarkersInBody>3</MinimumMarkersInBody>
+        <BoneLengthTolerance>5.000000</BoneLengthTolerance>
+        <Points>
+            <Point X="203.286308" Y="328.356844" Z="2.961990" Virtual="0" Name="L-frame - 1"/>
+            <Point X="89.739069" Y="-19.756862" Z="0.351442" Virtual="0" Name="L-frame - 2"/>
+            <Point X="-321.151453" Y="-98.038164" Z="-0.994993" Virtual="0" Name="L-frame - 3"/>
+            <Point X="28.126077" Y="-210.561819" Z="-2.318439" Virtual="0" Name="L-frame - 4"/>
+        </Points>
+        <Data_origin X="0.000000" Y="0.000000" Z="0.000000" Relative_body="1">0</Data_origin>
+        <Data_orientation R11="1.000000" R12="0.000000" R13="0.000000" R21="0.000000" R22="1.000000" R23="0.000000" R31="0.000000" R32="0.000000" R33="1.000000" Relative_body="1">0</Data_orientation>
+    </Body>
+    <Body>
+        <Name>realsense</Name>
+        <Color R="0" G="0" B="255"/>
+        <MaximumResidual>10.000000</MaximumResidual>
+        <MinimumMarkersInBody>3</MinimumMarkersInBody>
+        <BoneLengthTolerance>5.000000</BoneLengthTolerance>
+        <Points>
+            <Point X="14.748034" Y="-38.525508" Z="-10.638468" Virtual="0" Name="realsense - 1"/>
+            <Point X="-69.104809" Y="-11.609778" Z="10.565058" Virtual="0" Name="realsense - 2"/>
+            <Point X="63.395699" Y="8.614364" Z="3.508928" Virtual="0" Name="realsense - 3"/>
+            <Point X="-9.038923" Y="41.520923" Z="-3.435519" Virtual="0" Name="realsense - 4"/>
+        </Points>
+        <Data_origin X="0.000000" Y="0.000000" Z="0.000000" Relative_body="1">0</Data_origin>
+        <Data_orientation R11="1.000000" R12="0.000000" R13="0.000000" R21="0.000000" R22="1.000000" R23="0.000000" R31="0.000000" R32="0.000000" R33="1.000000" Relative_body="1">0</Data_orientation>
+    </Body>
+</QTM_Body_File_Ver_1.00>
