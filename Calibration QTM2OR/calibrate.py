@@ -4,8 +4,7 @@ from scipy.optimize import minimize
 from scipy.spatial.transform import Rotation
 from read_unity_data import *
 import xml.etree.ElementTree as ET
-# filepath_xml = "C:/Users/sjn/Documents/QZ summer/testing_xml_parsing.xml" #this ought to be the file path to an xml file containing the "oculus_rift" 6DOF body
-filepath_xml = "C:/Users/gussjo/OneDrive - Zenuity/Documents/someProject/190731_calibrated.xml"
+from tkinter import filedialog
 
 r_qtm = get_qtm_pos_data()
 r_or = get_or_pos_data()
@@ -33,7 +32,7 @@ def obj_fun(params): #params = [sx sy sz a b c d]
 		sum += np.linalg.norm(r_or[i] - QTM2OR(R, r_qtm[i], U[i], s))**2
 	return sum/len(r_qtm) #returns RMS-error
 
-s_guess = np.array([14.41442192, -36.4193059, 75.41150905])*1e-3 # [m]
+s_guess = np.array([79.62200365, 46.00784465, -18.66084049])*1e-3 # [m]
 quaternion_guess = np.array([0.3363792, 0.0404392, 1.99778822, 0.03380634]) # [a b c d] ~ a + bi + cj + dk
 guess = np.append(s_guess, quaternion_guess)
 res = minimize(obj_fun, guess, method='COBYLA', tol=1e-6)
@@ -84,6 +83,9 @@ if (input_var=='y'):
 	np.savetxt('data_files/t_from_calibration.txt', t)
 
 	### edit QTM 6DOF body ###
+	filepath_xml = filedialog.askopenfilename(initialdir="C:/Users/gussjo/OneDrive - Zenuity/Documents/someProject", \
+												title="Locate the 6DOF file used for this recording", \
+												filetypes = (("xml files","*.xml"),("all files","*.*")))
 	tree = ET.parse(filepath_xml)
 	root = tree.getroot()
 	for body in root:
@@ -97,5 +99,3 @@ if (input_var=='y'):
 	tree.write(filepath_xml)
 
 	print('Calibration data saved as ' + filepath_xml + '.')
-
-
