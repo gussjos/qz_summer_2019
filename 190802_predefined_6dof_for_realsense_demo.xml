@@ -6,10 +6,10 @@
         <MinimumMarkersInBody>3</MinimumMarkersInBody>
         <BoneLengthTolerance>5.000000</BoneLengthTolerance>
         <Points>
-            <Point X="203.286308" Y="328.356844" Z="2.961990" Virtual="0" Name="L-frame - 1"/>
-            <Point X="89.739069" Y="-19.756862" Z="0.351442" Virtual="0" Name="L-frame - 2"/>
-            <Point X="-321.151453" Y="-98.038164" Z="-0.994993" Virtual="0" Name="L-frame - 3"/>
-            <Point X="28.126077" Y="-210.561819" Z="-2.318439" Virtual="0" Name="L-frame - 4"/>
+            <Point X="203.286308" Y="328.356844" Z="2.961990" Virtual="0" PhysicalId="0" Name="L-frame - 1"/>
+            <Point X="89.739069" Y="-19.756862" Z="0.351442" Virtual="0" PhysicalId="0" Name="L-frame - 2"/>
+            <Point X="-321.151453" Y="-98.038164" Z="-0.994993" Virtual="0" PhysicalId="0" Name="L-frame - 3"/>
+            <Point X="28.126077" Y="-210.561819" Z="-2.318439" Virtual="0" PhysicalId="0" Name="L-frame - 4"/>
         </Points>
         <Data_origin X="0.000000" Y="0.000000" Z="0.000000" Relative_body="1">0</Data_origin>
         <Data_orientation R11="1.000000" R12="0.000000" R13="0.000000" R21="0.000000" R22="1.000000" R23="0.000000" R31="0.000000" R32="0.000000" R33="1.000000" Relative_body="1">0</Data_orientation>
@@ -21,11 +21,11 @@
         <MinimumMarkersInBody>3</MinimumMarkersInBody>
         <BoneLengthTolerance>5.000000</BoneLengthTolerance>
         <Points>
-            <Point X="-74.015652" Y="33.948816" Z="75.477026" Virtual="0" Name="oculus_rift - 1"/>
-            <Point X="-72.965119" Y="-1.509018" Z="59.277710" Virtual="0" Name="oculus_rift - 2"/>
-            <Point X="-112.787897" Y="-20.170718" Z="75.340908" Virtual="0" Name="oculus_rift - 3"/>
-            <Point X="-73.161472" Y="68.735912" Z="57.873659" Virtual="0" Name="oculus_rift - 4"/>
-            <Point X="-115.422198" Y="33.734509" Z="59.202041" Virtual="0" Name="oculus_rift - 5"/>
+            <Point X="-74.015652" Y="33.948816" Z="75.477026" Virtual="0" PhysicalId="0" Name="oculus_rift - 1"/>
+            <Point X="-72.965119" Y="-1.509018" Z="59.277710" Virtual="0" PhysicalId="0" Name="oculus_rift - 2"/>
+            <Point X="-112.787897" Y="-20.170718" Z="75.340908" Virtual="0" PhysicalId="0" Name="oculus_rift - 3"/>
+            <Point X="-73.161472" Y="68.735912" Z="57.873659" Virtual="0" PhysicalId="0" Name="oculus_rift - 4"/>
+            <Point X="-115.422198" Y="33.734509" Z="59.202041" Virtual="0" PhysicalId="0" Name="oculus_rift - 5"/>
         </Points>
         <Data_origin X="0.000000" Y="0.000000" Z="0.000000" Relative_body="1">0</Data_origin>
         <Data_orientation R11="1.000000" R12="0.000000" R13="0.000000" R21="0.000000" R22="1.000000" R23="0.000000" R31="0.000000" R32="0.000000" R33="1.000000" Relative_body="1">0</Data_orientation>
@@ -37,10 +37,10 @@
         <MinimumMarkersInBody>3</MinimumMarkersInBody>
         <BoneLengthTolerance>5.000000</BoneLengthTolerance>
         <Points>
-            <Point X="5.637322" Y="-42.647829" Z="-5.734379" Virtual="0" Name="realsense - 1"/>
-            <Point X="-63.481046" Y="-3.451774" Z="11.222973" Virtual="0" Name="realsense - 2"/>
-            <Point X="70.855111" Y="5.788060" Z="2.659019" Virtual="0" Name="realsense - 3"/>
-            <Point X="-13.011388" Y="40.311543" Z="-8.147613" Virtual="0" Name="realsense - 4"/>
+            <Point X="7.826961" Y="-41.633182" Z="30.570439" Virtual="0" PhysicalId="0" Name="realsense - 1"/>
+            <Point X="-63.162891" Y="-7.733074" Z="50.879424" Virtual="0" PhysicalId="0" Name="realsense - 2"/>
+            <Point X="70.468364" Y="9.234971" Z="43.153363" Virtual="0" PhysicalId="0" Name="realsense - 3"/>
+            <Point X="-15.132436" Y="40.131285" Z="35.396774" Virtual="0" PhysicalId="0" Name="realsense - 4"/>
         </Points>
         <Data_origin X="0.000000" Y="0.000000" Z="0.000000" Relative_body="1">0</Data_origin>
         <Data_orientation R11="1.000000" R12="0.000000" R13="0.000000" R21="0.000000" R22="1.000000" R23="0.000000" R31="0.000000" R32="0.000000" R33="1.000000" Relative_body="1">0</Data_orientation>
