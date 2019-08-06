@@ -32,7 +32,7 @@ def obj_fun(params): #params = [sx sy sz a b c d]
 		sum += np.linalg.norm(r_or[i] - QTM2OR(R, r_qtm[i], U[i], s))**2
 	return sum/len(r_qtm) #returns RMS-error
 
-s_guess = np.array([79.62200365, 46.00784465, -18.66084049])*1e-3 # [m]
+s_guess = np.array([-16.72286907, 41.05006416, 1.69847897])*1e-3 # [m]
 quaternion_guess = np.array([0.3363792, 0.0404392, 1.99778822, 0.03380634]) # [a b c d] ~ a + bi + cj + dk
 guess = np.append(s_guess, quaternion_guess)
 res = minimize(obj_fun, guess, method='COBYLA', tol=1e-6)

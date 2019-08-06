@@ -24,8 +24,8 @@ df_np_qtm = df_qtm.to_numpy()
 df_or = pandas.read_csv(or_file)
 df_np_or = df_or.to_numpy()
 
-start_index = 1000 #TODO: make this less bodgy
-end_index = -1000
+start_index = 50 #TODO: make this less bodgy
+end_index = -1
 x_qtm = df_np_qtm[start_index:end_index,0]
 y_qtm = df_np_qtm[start_index:end_index,1]
 z_qtm = df_np_qtm[start_index:end_index,2]

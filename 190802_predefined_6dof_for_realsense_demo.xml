@@ -16,8 +16,8 @@
     </Body>
     <Body>
         <Name>oculus_rift</Name>
-        <Color R="0" G="255" B="0"/>
-        <MaximumResidual>10.000000</MaximumResidual>
+        <Color R="255" G="0" B="0"/>
+        <MaximumResidual>20.000000</MaximumResidual>
         <MinimumMarkersInBody>3</MinimumMarkersInBody>
         <BoneLengthTolerance>5.000000</BoneLengthTolerance>
         <Points>
@@ -37,10 +37,10 @@
         <MinimumMarkersInBody>3</MinimumMarkersInBody>
         <BoneLengthTolerance>5.000000</BoneLengthTolerance>
         <Points>
-            <Point X="7.826961" Y="-41.633182" Z="30.570439" Virtual="0" PhysicalId="0" Name="realsense - 1"/>
-            <Point X="-63.162891" Y="-7.733074" Z="50.879424" Virtual="0" PhysicalId="0" Name="realsense - 2"/>
-            <Point X="70.468364" Y="9.234971" Z="43.153363" Virtual="0" PhysicalId="0" Name="realsense - 3"/>
-            <Point X="-15.132436" Y="40.131285" Z="35.396774" Virtual="0" PhysicalId="0" Name="realsense - 4"/>
+            <Point X="6.942650" Y="-45.077382" Z="30.734000" Virtual="0" PhysicalId="0" Name="realsense - 1"/>
+            <Point X="-64.711630" Y="-11.154071" Z="48.513323" Virtual="0" PhysicalId="0" Name="realsense - 2"/>
+            <Point X="69.108151" Y="5.807391" Z="45.432124" Virtual="0" PhysicalId="0" Name="realsense - 3"/>
+            <Point X="-16.169374" Y="36.692415" Z="34.657024" Virtual="0" PhysicalId="0" Name="realsense - 4"/>
         </Points>
         <Data_origin X="0.000000" Y="0.000000" Z="0.000000" Relative_body="1">0</Data_origin>
         <Data_orientation R11="1.000000" R12="0.000000" R13="0.000000" R21="0.000000" R22="1.000000" R23="0.000000" R31="0.000000" R32="0.000000" R33="1.000000" Relative_body="1">0</Data_orientation>
