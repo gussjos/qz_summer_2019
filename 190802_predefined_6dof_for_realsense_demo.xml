@@ -1,48 +1,48 @@
 <QTM_Body_File_Ver_1.00>
     <Body>
         <Name>L-frame</Name>
-        <Color R="0" G="255" B="0"/>
+        <Color B="0" G="255" R="0" />
         <MaximumResidual>10.000000</MaximumResidual>
         <MinimumMarkersInBody>3</MinimumMarkersInBody>
         <BoneLengthTolerance>5.000000</BoneLengthTolerance>
         <Points>
-            <Point X="203.286308" Y="328.356844" Z="2.961990" Virtual="0" PhysicalId="0" Name="L-frame - 1"/>
-            <Point X="89.739069" Y="-19.756862" Z="0.351442" Virtual="0" PhysicalId="0" Name="L-frame - 2"/>
-            <Point X="-321.151453" Y="-98.038164" Z="-0.994993" Virtual="0" PhysicalId="0" Name="L-frame - 3"/>
-            <Point X="28.126077" Y="-210.561819" Z="-2.318439" Virtual="0" PhysicalId="0" Name="L-frame - 4"/>
+            <Point Name="L-frame - 1" PhysicalId="0" Virtual="0" X="203.286308" Y="328.356844" Z="2.961990" />
+            <Point Name="L-frame - 2" PhysicalId="0" Virtual="0" X="89.739069" Y="-19.756862" Z="0.351442" />
+            <Point Name="L-frame - 3" PhysicalId="0" Virtual="0" X="-321.151453" Y="-98.038164" Z="-0.994993" />
+            <Point Name="L-frame - 4" PhysicalId="0" Virtual="0" X="28.126077" Y="-210.561819" Z="-2.318439" />
         </Points>
-        <Data_origin X="0.000000" Y="0.000000" Z="0.000000" Relative_body="1">0</Data_origin>
+        <Data_origin Relative_body="1" X="0.000000" Y="0.000000" Z="0.000000">0</Data_origin>
         <Data_orientation R11="1.000000" R12="0.000000" R13="0.000000" R21="0.000000" R22="1.000000" R23="0.000000" R31="0.000000" R32="0.000000" R33="1.000000" Relative_body="1">0</Data_orientation>
     </Body>
     <Body>
         <Name>oculus_rift</Name>
-        <Color R="255" G="0" B="0"/>
+        <Color B="0" G="0" R="255" />
         <MaximumResidual>20.000000</MaximumResidual>
         <MinimumMarkersInBody>3</MinimumMarkersInBody>
         <BoneLengthTolerance>5.000000</BoneLengthTolerance>
         <Points>
-            <Point X="-74.015652" Y="33.948816" Z="75.477026" Virtual="0" PhysicalId="0" Name="oculus_rift - 1"/>
-            <Point X="-72.965119" Y="-1.509018" Z="59.277710" Virtual="0" PhysicalId="0" Name="oculus_rift - 2"/>
-            <Point X="-112.787897" Y="-20.170718" Z="75.340908" Virtual="0" PhysicalId="0" Name="oculus_rift - 3"/>
-            <Point X="-73.161472" Y="68.735912" Z="57.873659" Virtual="0" PhysicalId="0" Name="oculus_rift - 4"/>
-            <Point X="-115.422198" Y="33.734509" Z="59.202041" Virtual="0" PhysicalId="0" Name="oculus_rift - 5"/>
+            <Point Name="oculus_rift - 1" PhysicalId="0" Virtual="0" X="-72.0066586089957" Y="30.790476467549443" Z="60.21498180867438" />
+            <Point Name="oculus_rift - 2" PhysicalId="0" Virtual="0" X="-70.9561256089957" Y="-4.667357532450559" Z="44.015665808674385" />
+            <Point Name="oculus_rift - 3" PhysicalId="0" Virtual="0" X="-110.7789036089957" Y="-23.32905753245056" Z="60.078863808674384" />
+            <Point Name="oculus_rift - 4" PhysicalId="0" Virtual="0" X="-71.15247860899571" Y="65.57757246754944" Z="42.61161480867439" />
+            <Point Name="oculus_rift - 5" PhysicalId="0" Virtual="0" X="-113.4132046089957" Y="30.576169467549445" Z="43.93999680867439" />
         </Points>
-        <Data_origin X="0.000000" Y="0.000000" Z="0.000000" Relative_body="1">0</Data_origin>
+        <Data_origin Relative_body="1" X="0.000000" Y="0.000000" Z="0.000000">0</Data_origin>
         <Data_orientation R11="1.000000" R12="0.000000" R13="0.000000" R21="0.000000" R22="1.000000" R23="0.000000" R31="0.000000" R32="0.000000" R33="1.000000" Relative_body="1">0</Data_orientation>
     </Body>
     <Body>
         <Name>realsense</Name>
-        <Color R="0" G="0" B="255"/>
+        <Color B="255" G="0" R="0" />
         <MaximumResidual>10.000000</MaximumResidual>
         <MinimumMarkersInBody>3</MinimumMarkersInBody>
         <BoneLengthTolerance>5.000000</BoneLengthTolerance>
         <Points>
-            <Point X="6.942650" Y="-45.077382" Z="30.734000" Virtual="0" PhysicalId="0" Name="realsense - 1"/>
-            <Point X="-64.711630" Y="-11.154071" Z="48.513323" Virtual="0" PhysicalId="0" Name="realsense - 2"/>
-            <Point X="69.108151" Y="5.807391" Z="45.432124" Virtual="0" PhysicalId="0" Name="realsense - 3"/>
-            <Point X="-16.169374" Y="36.692415" Z="34.657024" Virtual="0" PhysicalId="0" Name="realsense - 4"/>
+            <Point Name="realsense - 1" PhysicalId="0" Virtual="0" X="6.942650" Y="-45.077382" Z="30.734000" />
+            <Point Name="realsense - 2" PhysicalId="0" Virtual="0" X="-64.711630" Y="-11.154071" Z="48.513323" />
+            <Point Name="realsense - 3" PhysicalId="0" Virtual="0" X="69.108151" Y="5.807391" Z="45.432124" />
+            <Point Name="realsense - 4" PhysicalId="0" Virtual="0" X="-16.169374" Y="36.692415" Z="34.657024" />
         </Points>
-        <Data_origin X="0.000000" Y="0.000000" Z="0.000000" Relative_body="1">0</Data_origin>
+        <Data_origin Relative_body="1" X="0.000000" Y="0.000000" Z="0.000000">0</Data_origin>
         <Data_orientation R11="1.000000" R12="0.000000" R13="0.000000" R21="0.000000" R22="1.000000" R23="0.000000" R31="0.000000" R32="0.000000" R33="1.000000" Relative_body="1">0</Data_orientation>
     </Body>
 </QTM_Body_File_Ver_1.00>
