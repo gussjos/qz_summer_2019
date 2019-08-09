@@ -76,7 +76,7 @@ r_qtm_transformed = np.array([QTM2OR(R, q, U[i], s) for i,q in enumerate(r_qtm)]
 plot_trajectories(r_qtm_transformed, r_or)
 
 input_var = input("save calibration? y/n: ")
-if (input_var=='y'):
+if (input_var=='y' or input_var=='Y'):
 	np.savetxt('data_files/s_from_calibration.txt', s)
 	np.savetxt('data_files/q_from_calibration.txt', quaternion)
 	np.savetxt('data_files/R_from_calibration.txt', R)
